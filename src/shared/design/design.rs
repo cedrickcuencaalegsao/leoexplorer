@@ -28,6 +28,12 @@ pub fn main_style() -> String {
             font-weight: 700;
             font-style: normal;
         }}
+        @font-face {{
+            font-family: 'GoogleSans';
+            src: url('/assets/fonts/GoogleSans-BoldItalic.ttf') format('truetype');
+            font-weight: 700;
+            font-style: italic;
+        }}
         body {{
             height: 100vh;
             margin: 0;
@@ -46,21 +52,23 @@ pub fn main_style() -> String {
         }}
         .side-panel-container {{
             width: 15%;
-            min-width: 200px;
+            min-width: 180px;
             background-color: #ffffff;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             padding: 10px;
+            color: #0a1931;
         }}
         .main-panel-container {{
             flex: 1;
             min-width: 300px;
+            background-color: #f6fafd;
         }}
         .preview-panel-container {{
             width: 100%;
             max-width: 500px;
-            background-color: #fafaff;
+            background-color: #b3cfe5;
         }}
         .dynamic-sidebar-container {{
             width: 100%;
@@ -107,14 +115,39 @@ pub fn side_panel_style() -> String {
 pub fn sp_menu_style() -> String {
     format! {
         ".sp-menu {{
-            margin: 10px 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            justify-content: space-between;
+            margin: 0px 0;
+            padding: 7px;
+            border-radius: 7px;
             cursor: pointer;
+            color: #21222d;
+            transition: all 0.3s ease;
+        }}
+        .sp-menu:hover {{
+            background: rgba(0,0,0,0.06);
+        }}
+        .sp-menu-wrapper {{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }}
+        .sp-menu-dropdown {{
+            display: flex;
+            flex-direction: column;
+            padding-left: 7px;
+            gap: 2px;
+            margin-left: 20px;
+            border-left: 2px solid #565656;
         }}
         .sp-menu-children {{
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap:8px;
+            gap: 8px;
         }}
         .sp-icon{{
             display: flex;
@@ -123,10 +156,59 @@ pub fn sp_menu_style() -> String {
         .sp-label p{{
             margin: 0;
             font-family: 'GoogleSans', Arial, sans-serif;
-            font-weight: 700;
-            font-size: 12px;
-        }}"
+            font-weight: 600;
+            font-size: 15px;
+        }}
+        .sp-chevron{{
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2b2b2b;
+            transition: transform 0.3s ease;
+        }}
+        .sp-chevron-up {{
+            transform: rotate(180deg);
+        }}
+        "
     }
+}
+
+pub fn sp_items_style() -> String {
+    format!(
+        ".sp-items {{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 7px;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            font-family: 'GoogleSans', Arial, sans-serif;
+        }}
+        .sp-items:hover {{
+            font-family: 'GoogleSans', Arial, sans-serif;
+            font-weight: 700;
+            background: rgba(0,0,0,0.06);
+        }}
+        .sp-items-icon {{
+            display: flex;
+            align-items: center;
+            color: #e8a020;  /* orange for folders */
+        }}
+        .sp-items-label p {{
+            margin: 0;
+            font-family: 'GoogleSans', Arial, sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: #21222d;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 130px;
+        }}"
+    )
 }
 
 #[allow(dead_code)]
