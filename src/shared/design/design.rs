@@ -55,15 +55,17 @@ pub fn main_style() -> String {
         }}
         .main-panel-container {{
             flex: 1;
-            border: 1px solid red;
+            min-width: 300px;
         }}
         .preview-panel-container {{
-            flex: 1;
-            border: 1px solid green;
+            width: 100%;
+            max-width: 500px;
+            background-color: #fafaff;
         }}
         .dynamic-sidebar-container {{
-            flex: 1;
-            border: 1px solid blue;
+            width: 100%;
+            max-width: 50px;
+            background-color: #ffffff;
         }}
         "
 
