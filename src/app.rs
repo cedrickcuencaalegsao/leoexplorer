@@ -1,14 +1,12 @@
 #![allow(non_snake_case)]
-
-use crate::components::side_panel::SidePanel;
-
 use dioxus::prelude::*;
 
-// use serde::{Deserialize, Serialize};
-// use wasm_bindgen::prelude::*;
+use crate::components::side_panel::SidePanel;
+use crate::shared::design::design::main_style;
 
 pub fn App() -> Element {
     rsx! {
+        style { "{main_style()}" },
         main {
             div{
                 class: "app-container",
