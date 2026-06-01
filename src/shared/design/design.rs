@@ -94,6 +94,9 @@ pub fn side_panel_style() -> String {
             width: 100%;
             overflow-y: auto;
             height: 100%;
+        }}
+        .drive-list-container {{
+            margin-top: 30px;
         }}"
     }
 }
@@ -101,10 +104,47 @@ pub fn side_panel_style() -> String {
 #[allow(dead_code)]
 pub fn sp_menu_style() -> String {
     format! {
-        ".sp-menu{{
+        ".sp-menu {{
+            margin: 10px 0;
+            cursor: pointer;
+        }}
+        .sp-menu-children {{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap:8px;
+        }}
+        .sp-icon{{
+            display: flex;
+            align-items: center;
+        }}
+        .sp-label p{{
+            margin: 0;
             font-family: 'GoogleSans', Arial, sans-serif;
             font-weight: 700;
             font-size: 12px;
+        }}"
+    }
+}
+
+#[allow(dead_code)]
+pub fn sp_drive_style() -> String {
+    format! {
+        ".sp-drive {{
+            margin: 10px 0;
+            cursor: pointer;
+        }}
+        .sp-drive-children {{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap:8px;
+        }}
+        .sp-drive-icon {{
+            font-size: 16px;
+        }}
+        .sp-drive-label {{
+            font-size: 14px;
         }}"
     }
 }

@@ -1,8 +1,9 @@
+#![allow(non_snake_case)]
 use crate::shared::design::design::sp_menu_style;
 use dioxus::prelude::*;
 
 #[component]
-pub fn SpMenu(label: String) -> Element {
+pub fn SpMenu(label: String, icon: Element) -> Element {
     rsx! {
         style {
             "{sp_menu_style()}"
@@ -11,8 +12,15 @@ pub fn SpMenu(label: String) -> Element {
             class: "sp-menu",
             div{
                 class: "sp-menu-children",
-                p{
-                    "{label}"
+                div{
+                    class: "sp-icon",
+                    {icon},
+                },
+                div {
+                    class: "sp-label",
+                    p{
+                        "{label}"
+                    }
                 }
             }
         }

@@ -1,3 +1,4 @@
+#![allow(non_snake_case)]
 use crate::shared::design::design::secondary_button_style;
 use dioxus::prelude::*;
 
