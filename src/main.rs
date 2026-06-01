@@ -1,4 +1,6 @@
 mod app;
+mod components;
+mod shared;
 
 use app::App;
 use dioxus::prelude::*;
