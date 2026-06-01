@@ -9,7 +9,7 @@ pub fn SpMenu(label: String, icon: Element) -> Element {
             "{sp_menu_style()}"
         }
         div{
-            class: "sp-menu",
+            class: "sp-menu" } else { "sp-menu sp-menu-collapsed" ,
             div{
                 class: "sp-menu-children",
                 div{

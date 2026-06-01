@@ -28,6 +28,12 @@ pub fn main_style() -> String {
             font-weight: 700;
             font-style: normal;
         }}
+        @font-face {{
+            font-family: 'GoogleSans';
+            src: url('/assets/fonts/GoogleSans-BoldItalic.ttf') format('truetype');
+            font-weight: 700;
+            font-style: italic;
+        }}
         body {{
             height: 100vh;
             margin: 0;
@@ -46,7 +52,7 @@ pub fn main_style() -> String {
         }}
         .side-panel-container {{
             width: 15%;
-            min-width: 200px;
+            min-width: 170px;
             background-color: #ffffff;
             overflow: hidden;
             display: flex;
@@ -127,6 +133,41 @@ pub fn sp_menu_style() -> String {
             font-size: 12px;
         }}"
     }
+}
+
+pub fn sp_items_style() -> String {
+    format!(
+        ".sp-items {{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 7px;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            font-family: 'GoogleSans', Arial, sans-serif;
+        }}
+        .sp-items:hover {{
+            background: rgba(0,0,0,0.06);
+        }}
+        .sp-items-icon {{
+            display: flex;
+            align-items: center;
+            color: #e8a020;  /* orange for folders */
+        }}
+        .sp-items-label p {{
+            margin: 0;
+            font-family: 'GoogleSans', Arial, sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: #21222d;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 130px;
+        }}"
+    )
 }
 
 #[allow(dead_code)]
