@@ -8,6 +8,8 @@ use lucide_dioxus::{
     File, Files, Folder, FolderDown, HardDrive, House, Images, Monitor, Music, Trash2, Video,
 };
 
+pub const APP_ICON: Asset = asset!("/assets/icons/app-icon.png");
+
 #[component]
 pub fn SidePanel() -> Element {
     let sp_menu: Vec<(&str, Element)> = vec![
@@ -50,6 +52,20 @@ pub fn SidePanel() -> Element {
         style { "{side_panel_style()}"},
         div{
             class: "side-panel",
+            div{
+                class: "app-name-and-icon-container",
+                div{
+                    class: "app-icon",
+                    img {
+                        src: APP_ICON,
+                    }
+                }
+                div{
+                    class: "app-name",
+                    "Leo Explorer"
+                }
+            }
+
             for (label, icon) in sp_menu {
                 SpMenu {
                     label: label.to_string(),

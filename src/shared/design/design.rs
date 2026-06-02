@@ -107,6 +107,25 @@ pub fn side_panel_style() -> String {
             overflow-y: auto;
             height: 100%;
         }}
+        .app-name-and-icon-container{{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }}
+        .app-icon img{{
+            width: 35px;
+            height: 35px;
+        }}
+        .app-name {{
+            font-size: {FONT_SIZE};
+            color: {DARK_BLUE};
+            font-weight: 700;
+            font-family: Google Sans, sans-serif;
+            font-style: italic;
+            font-size: 18px;
+        }}
         .drive-list-container {{
             margin-top: 30px;
         }}"
