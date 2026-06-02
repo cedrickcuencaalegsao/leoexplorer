@@ -1,4 +1,6 @@
-use crate::shared::constant::constant::{BORDER_RADIUS, FONT_SIZE, PADDING, PRIMARY_COLOR};
+use crate::shared::constant::constant::{
+    BORDER_RADIUS, DARK_BLUE, FONT_SIZE, GREY, PADDING, PRIMARY_COLOR,
+};
 
 #[allow(dead_code)]
 pub fn main_style() -> String {
@@ -124,8 +126,11 @@ pub fn sp_menu_style() -> String {
             padding: 7px;
             border-radius: 7px;
             cursor: pointer;
-            color: #21222d;
+            color: {GREY};
             transition: all 0.3s ease;
+        }}
+        .sp-menu-open {{
+            color: {DARK_BLUE};
         }}
         .sp-menu:hover {{
             background: rgba(0,0,0,0.06);
@@ -140,8 +145,8 @@ pub fn sp_menu_style() -> String {
             flex-direction: column;
             padding-left: 7px;
             gap: 2px;
-            margin-left: 20px;
-            border-left: 2px solid #565656;
+            margin-left: 16px;
+            border-left: 2px solid {GREY};
         }}
         .sp-menu-children {{
             display: flex;
