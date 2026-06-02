@@ -13,7 +13,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "leoexplorer",
+        "title": "Leo Explorer",
         "width": 800,
         "height": 600
       }

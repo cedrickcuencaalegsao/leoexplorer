@@ -102,10 +102,50 @@ pub fn secondary_button_style() -> String {
 pub fn side_panel_style() -> String {
     format! {
         ".side-panel {{
-            height: 100%;
             width: 100%;
-            overflow-y: auto;
             height: 100%;
+            overflow-y: auto;
+            padding-right: 10px;
+
+            /* Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0,0,0,0.2) transparent;
+        }}
+        /* Chrome, Edge, Safari */
+        .side-panel::-webkit-scrollbar {{
+            width: 5px;
+        }}
+
+        .side-panel::-webkit-scrollbar-track {{
+            background: transparent;
+        }}
+
+        .side-panel::-webkit-scrollbar-thumb {{
+            background: rgba(0,0,0,0.18);
+            border-radius: 999px;
+        }}
+
+        .side-panel::-webkit-scrollbar-thumb:hover {{
+            background: rgba(0,0,0,0.3);
+        }}
+        .app-name-and-icon-container{{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }}
+        .app-icon img{{
+            width: 35px;
+            height: 35px;
+        }}
+        .app-name {{
+            font-size: {FONT_SIZE};
+            color: {DARK_BLUE};
+            font-weight: 700;
+            font-family: Google Sans, sans-serif;
+            font-style: italic;
+            font-size: 18px;
         }}
         .drive-list-container {{
             margin-top: 30px;
@@ -141,12 +181,19 @@ pub fn sp_menu_style() -> String {
             width: 100%;
         }}
         .sp-menu-dropdown {{
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-rows: 0fr;
             padding-left: 7px;
             gap: 2px;
             margin-left: 16px;
             border-left: 2px solid {GREY};
+            transition: grid-template-rows 0.3s ease;
+        }}
+        .sp-menu-dropdown.open {{
+            grid-template-rows: 1fr;
+        }}
+        .sp-menu-dropdown > * {{
+            overflow: hidden;
         }}
         .sp-menu-children {{
             display: flex;
