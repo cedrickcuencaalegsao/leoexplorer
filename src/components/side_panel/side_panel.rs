@@ -5,16 +5,15 @@ use crate::components::sp_menu::SpMenu;
 use crate::shared::{constant::constant::FOLDER_COLOR, design::design::side_panel_style};
 use dioxus::prelude::*;
 use lucide_dioxus::{
-    File, Folder, FolderDown, HardDrive, House, Images, Monitor, Music, Trash2, Video,
+    File, Files, Folder, FolderDown, HardDrive, House, Images, Monitor, Music, Trash2, Video,
 };
 
 #[component]
 pub fn SidePanel() -> Element {
-    // let state: AppState = use_context();
-    // let expand_sp_items = state.expand_sp_menu;
     let sp_menu: Vec<(&str, Element)> = vec![
         ("Home", rsx! {House {size: 20} }),
         ("Desktop", rsx! {Monitor {size: 20} }),
+        ("Documents", rsx! {Files {size: 20} }),
         ("Downloads", rsx! {FolderDown {size: 20} }),
         ("Photos", rsx! {Images {size: 20}}),
         ("Music", rsx! {Music {size: 20}}),
