@@ -102,10 +102,31 @@ pub fn secondary_button_style() -> String {
 pub fn side_panel_style() -> String {
     format! {
         ".side-panel {{
-            height: 100%;
             width: 100%;
-            overflow-y: auto;
             height: 100%;
+            overflow-y: auto;
+            padding-right: 10px;
+
+            /* Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0,0,0,0.2) transparent;
+        }}
+        /* Chrome, Edge, Safari */
+        .side-panel::-webkit-scrollbar {{
+            width: 5px;
+        }}
+
+        .side-panel::-webkit-scrollbar-track {{
+            background: transparent;
+        }}
+
+        .side-panel::-webkit-scrollbar-thumb {{
+            background: rgba(0,0,0,0.18);
+            border-radius: 999px;
+        }}
+
+        .side-panel::-webkit-scrollbar-thumb:hover {{
+            background: rgba(0,0,0,0.3);
         }}
         .app-name-and-icon-container{{
             display: flex;
