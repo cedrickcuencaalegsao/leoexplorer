@@ -2,7 +2,7 @@
 use crate::components::sp_drive::SpDrive;
 use crate::components::sp_items::SpItems;
 use crate::components::sp_menu::SpMenu;
-use crate::shared::design::design::side_panel_style;
+use crate::shared::{constant::constant::FOLDER_COLOR, design::design::side_panel_style};
 use dioxus::prelude::*;
 use lucide_dioxus::{
     File, Folder, FolderDown, HardDrive, House, Images, Monitor, Music, Trash2, Video,
@@ -31,11 +31,11 @@ pub fn SidePanel() -> Element {
     let dropdown_items = rsx! {
         SpItems {
             label: "Proposal".to_string(),
-            icon: rsx! { Folder { size: 18, color: "#e8a020" } },
+            icon: rsx! { Folder { size: 18, color: FOLDER_COLOR} },
         }
         SpItems {
             label: "Files and...".to_string(),
-            icon: rsx! { Folder { size: 18, color: "#e8a020" } },
+            icon: rsx! { Folder { size: 18, color: FOLDER_COLOR } },
         }
         SpItems {
             label: "Document.docx".to_string(),
