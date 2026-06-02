@@ -126,8 +126,11 @@ pub fn sp_menu_style() -> String {
             padding: 7px;
             border-radius: 7px;
             cursor: pointer;
-            color: {DARK_BLUE};
+            color: {GREY};
             transition: all 0.3s ease;
+        }}
+        .sp-menu-open {{
+            color: {DARK_BLUE};
         }}
         .sp-menu:hover {{
             background: rgba(0,0,0,0.06);

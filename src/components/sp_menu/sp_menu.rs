@@ -20,7 +20,7 @@ pub fn SpMenu(label: String, icon: Element, children: Element) -> Element {
         div {
             class: "sp-menu-wrapper",
             div {
-                class: "sp-menu",
+                class: if is_open { "sp-menu sp-menu-open" } else { "sp-menu" },
                 onclick: move |_| OpenSpMenu(&label_for_open),
                 div {
                     class: "sp-menu-children",
