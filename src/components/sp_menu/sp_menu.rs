@@ -10,7 +10,7 @@ use lucide_dioxus::ChevronDown;
 pub fn SpMenu(label: String, icon: Element, children: Element) -> Element {
     let state: AppState = use_context();
     let expand = state.expand_sp_menu;
-    let is_open = expand.read().as_deref() == Some(&label);
+    let is_open = expand.read().contains(&label);
 
     let label_for_open = label.clone();
     let label_for_expand = label.clone();
@@ -21,7 +21,7 @@ pub fn SpMenu(label: String, icon: Element, children: Element) -> Element {
             class: "sp-menu-wrapper",
             div {
                 class: if is_open { "sp-menu sp-menu-open" } else { "sp-menu" },
-                onclick: move |_| OpenSpMenu(&label_for_open),
+                onclick: move |_| OpenSpMenu(&label_for_open, expand),
                 div {
                     class: "sp-menu-children",
                     div { class: "sp-icon", {icon} },
@@ -30,7 +30,7 @@ pub fn SpMenu(label: String, icon: Element, children: Element) -> Element {
                 if label != "Home" {
                     div {
                         class: if is_open { "sp-chevron sp-chevron-up" } else { "sp-chevron sp-chevron-down" },
-                        onclick: move |_| ExpandSpMenu(&label_for_expand, is_open, expand),
+                        onclick: move |_| ExpandSpMenu(&label_for_expand, expand),
                         ChevronDown { size: 12 }
                     }
                 }

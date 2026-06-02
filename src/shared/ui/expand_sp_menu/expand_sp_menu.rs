@@ -2,14 +2,11 @@
 use dioxus::prelude::*;
 
 #[allow(dead_code)]
-pub fn ExpandSpMenu(label: &str, is_open: bool, mut expand: Signal<Option<String>>) {
-    if label == "Home" {
-        expand.set(None);
-        return;
-    }
-    if is_open {
-        expand.set(None);
+pub fn ExpandSpMenu(label: &str, mut expand: Signal<Vec<String>>) {
+    let mut list = expand.write();
+    if let Some(pos) = list.iter().position(|x| x == label) {
+        list.remove(pos);
     } else {
-        expand.set(Some(label.to_string()))
+        list.push(label.to_string());
     }
 }
