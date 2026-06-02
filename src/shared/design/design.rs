@@ -160,12 +160,19 @@ pub fn sp_menu_style() -> String {
             width: 100%;
         }}
         .sp-menu-dropdown {{
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-rows: 0fr;
             padding-left: 7px;
             gap: 2px;
             margin-left: 16px;
             border-left: 2px solid {GREY};
+            transition: grid-template-rows 0.3s ease;
+        }}
+        .sp-menu-dropdown.open {{
+            grid-template-rows: 1fr;
+        }}
+        .sp-menu-dropdown > * {{
+            overflow: hidden;
         }}
         .sp-menu-children {{
             display: flex;

@@ -37,7 +37,7 @@ pub fn SpMenu(label: String, icon: Element, children: Element) -> Element {
             }
             if is_open {
                 div {
-                    class: "sp-menu-dropdown",
+                    class: if is_open { "sp-menu-dropdown open" } else { "sp-menu-dropdown" },
                     {children}
                 }
             }
