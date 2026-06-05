@@ -37,10 +37,12 @@ pub fn Icon(
     }
 }
 
+pub mod arcticons;
 pub mod bxs;
 pub mod line_md;
 pub mod material_symbols;
 pub mod mdi;
 pub mod mingcute;
 pub mod proicons;
+pub mod simple_icons;
 pub mod uil;

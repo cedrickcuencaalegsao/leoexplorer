@@ -1,11 +1,8 @@
 #![allow(non_snake_case)]
-use crate::components::sp_drive::SpDrive;
-use crate::components::sp_items::SpItems;
-use crate::components::sp_menu::SpMenu;
+use crate::components::{sp_cloud::SpCloud, sp_drive::SpDrive, sp_items::SpItems, sp_menu::SpMenu};
 use crate::icons::*;
 use crate::shared::{constant::constant::FOLDER_COLOR, design::design::side_panel_style};
 use dioxus::prelude::*;
-use lucide_dioxus::{File, Folder, HardDrive};
 
 pub const APP_ICON: Asset = asset!("/assets/icons/app-icon.png");
 
@@ -80,6 +77,17 @@ pub fn SidePanel() -> Element {
         }
     };
 
+    let sp_cloud = rsx! {
+        SpCloud {
+            label: "iCloud".to_string(),
+            icon: rsx! {Icon {data: arcticons::IcloudDrive, width: "20", height: "20", color: "#4a90d9"} },
+        },
+        SpCloud {
+            label: "iCloud".to_string(),
+            icon: rsx! {Icon {data: simple_icons::Googledrive, width: "20", height: "20", color: "#4a90d9"} },
+        }
+    };
+
     rsx! {
         style { "{side_panel_style()}"},
         div{
@@ -105,6 +113,7 @@ pub fn SidePanel() -> Element {
                     children: dropdown_items.clone()
                 }
             }
+            div { class: "sp-cloud-container", {sp_cloud} }
             div{
                 class: "drive-list-container",
                 for (label, icon) in drive_list {
