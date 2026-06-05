@@ -1,50 +1,90 @@
 #![allow(non_snake_case)]
-use crate::components::sp_drive::SpDrive;
-use crate::components::sp_items::SpItems;
-use crate::components::sp_menu::SpMenu;
+use crate::components::{sp_cloud::SpCloud, sp_drive::SpDrive, sp_items::SpItems, sp_menu::SpMenu};
+use crate::icons::*;
 use crate::shared::{constant::constant::FOLDER_COLOR, design::design::side_panel_style};
 use dioxus::prelude::*;
-use lucide_dioxus::{
-    File, Files, Folder, FolderDown, HardDrive, House, Images, Monitor, Music, Trash2, Video,
-};
 
 pub const APP_ICON: Asset = asset!("/assets/icons/app-icon.png");
 
 #[component]
 pub fn SidePanel() -> Element {
     let sp_menu: Vec<(&str, Element)> = vec![
-        ("Home", rsx! {House {size: 20} }),
-        ("Desktop", rsx! {Monitor {size: 20} }),
-        ("Documents", rsx! {Files {size: 20} }),
-        ("Downloads", rsx! {FolderDown {size: 20} }),
-        ("Photos", rsx! {Images {size: 20}}),
-        ("Music", rsx! {Music {size: 20}}),
-        ("Movies", rsx! {Video {size: 20}}),
-        ("Trash", rsx! {Trash2 {size: 20}}),
+        (
+            "Home",
+            rsx! {Icon {data: material_symbols::HomeOutlineRounded, width: "20", height: "20"} },
+        ),
+        (
+            "Desktop",
+            rsx! {Icon {data: uil::Desktop, width: "20", height: "20"} },
+        ),
+        (
+            "Documents",
+            rsx! {Icon {data: mingcute::DocumentsLine, width: "20", height: "20"} },
+        ),
+        (
+            "Downloads",
+            rsx! {Icon {data: material_symbols::DownloadRounded, width: "20", height: "20"} },
+        ),
+        (
+            "Music",
+            rsx! {Icon{ data: mdi::Music, width: "20", height: "20" } },
+        ),
+        (
+            "Pictures",
+            rsx! {Icon { data:proicons::Photo, width: "20", height: "20" } },
+        ),
+        (
+            "Movies",
+            rsx! {Icon {data: bxs::Videos, width: "20", height: "20"} },
+        ),
+        (
+            "Trash",
+            rsx! {Icon {data: line_md::Trash, width: "20", height: "20"} },
+        ),
     ];
 
     let drive_list: Vec<(&str, Element)> = vec![
-        ("Drive 1:", rsx! {HardDrive {size: 20} }),
-        ("Drive 2:", rsx! {HardDrive {size: 20} }),
-        ("Drive 3 :", rsx! {HardDrive {size: 20} }),
+        (
+            "Drive 1:",
+            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "20", height: "20"} },
+        ),
+        (
+            "Drive 2:",
+            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "20", height: "20"} },
+        ),
+        (
+            "Drive 3 :",
+            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "20", height: "20"} },
+        ),
     ];
 
     let dropdown_items = rsx! {
         SpItems {
             label: "Proposal".to_string(),
-            icon: rsx! { Folder { size: 18, color: FOLDER_COLOR} },
+            icon: rsx! {Icon {data: line_md::Folder, width: "20", height: "20", color: FOLDER_COLOR} },
         }
         SpItems {
             label: "Files and...".to_string(),
-            icon: rsx! { Folder { size: 18, color: FOLDER_COLOR } },
+            icon: rsx! {Icon {data: line_md::Folder, width: "20", height: "20", color: FOLDER_COLOR} },
         }
         SpItems {
             label: "Document.docx".to_string(),
-            icon: rsx! { File { size: 18, color: "#4a90d9" } },
+            icon: rsx! {Icon {data: line_md::File, width: "20", height: "20", color: "#4a90d9"} },
         }
         SpItems {
             label: "Text.txt".to_string(),
-            icon: rsx! { File { size: 18, color: "#888" } },
+            icon: rsx! {Icon {data: line_md::File, width: "20", height: "20", color: "#888"} },
+        }
+    };
+
+    let sp_cloud = rsx! {
+        SpCloud {
+            label: "iCloud".to_string(),
+            icon: rsx! {Icon {data: arcticons::IcloudDrive, width: "20", height: "20", color: "#4a90d9"} },
+        },
+        SpCloud {
+            label: "iCloud".to_string(),
+            icon: rsx! {Icon {data: simple_icons::Googledrive, width: "20", height: "20", color: "#4a90d9"} },
         }
     };
 
@@ -73,6 +113,7 @@ pub fn SidePanel() -> Element {
                     children: dropdown_items.clone()
                 }
             }
+            div { class: "sp-cloud-container", {sp_cloud} }
             div{
                 class: "drive-list-container",
                 for (label, icon) in drive_list {
