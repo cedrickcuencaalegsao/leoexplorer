@@ -148,7 +148,7 @@ pub fn side_panel_style() -> String {
             font-size: 18px;
         }}
         .sp-cloud-wrapper {{
-            margin-top: 30px;
+            margin-top: 20px;
         }}
         .drive-list-container {{
             margin-top: 30px;
