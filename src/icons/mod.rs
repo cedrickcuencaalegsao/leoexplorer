@@ -39,6 +39,7 @@ pub fn Icon(
 
 pub mod arcticons;
 pub mod bxs;
+pub mod fluent;
 pub mod line_md;
 pub mod material_symbols;
 pub mod mdi;

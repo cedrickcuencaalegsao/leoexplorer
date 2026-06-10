@@ -147,6 +147,9 @@ pub fn side_panel_style() -> String {
             font-style: italic;
             font-size: 18px;
         }}
+        .sp-cloud-wrapper {{
+            margin-top: 30px;
+        }}
         .drive-list-container {{
             margin-top: 30px;
         }}"
@@ -283,4 +286,49 @@ pub fn sp_drive_style() -> String {
             font-size: 14px;
         }}"
     }
+}
+
+pub fn sp_cloud_style() -> String {
+    format!(
+        ".sp-cloud {{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            justify-content: space-between;
+            margin: 0px 0;
+            padding: 7px;
+            border-radius: 7px;
+            cursor: pointer;
+            color: {GREY};
+            transition: all 0.3s ease;
+        }}
+        .sp-cloud:hover {{
+            background: rgba(0,0,0,0.06);
+        }}
+        .sp-cloud-children {{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+        }}
+        .sp-cloud-icon{{
+            display: flex;
+            align-items: center;
+        }}
+        .sp-cloud-label p{{
+            margin: 0;
+            font-family: 'GoogleSans', Arial, sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+        }}
+        .sp-cloud-open {{
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2b2b2b;
+            transition: transform 0.3s ease;
+        }}"
+    )
 }
