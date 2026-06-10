@@ -83,13 +83,13 @@ pub fn SidePanel() -> Element {
     let sp_cloud: Vec<(String, Element, Element)> = vec![
         (
             "iCloud".to_string(),
-            rsx! {Icon {data: arcticons::IcloudDrive, width: "20", height: "20", color: {GREY}} },
-            rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: {GREY}} },
+            rsx! {Icon {data: arcticons::IcloudDrive, width: "20", height: "20", color: GREY} },
+            rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: GREY} },
         ),
         (
             "Google Drive".to_string(),
-            rsx! {Icon {data: simple_icons::Googledrive, width: "20", height: "20", color: {GREY}} },
-            rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: {GREY}} },
+            rsx! {Icon {data: simple_icons::Googledrive, width: "20", height: "20", color: GREY} },
+            rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: GREY} },
         ),
     ];
 
