@@ -1,7 +1,10 @@
 #![allow(non_snake_case)]
 use crate::components::{sp_cloud::SpCloud, sp_drive::SpDrive, sp_items::SpItems, sp_menu::SpMenu};
 use crate::icons::*;
-use crate::shared::{constant::constant::FOLDER_COLOR, design::design::side_panel_style};
+use crate::shared::{
+    constant::constant::{FOLDER_COLOR, GREY},
+    design::design::side_panel_style,
+};
 use dioxus::prelude::*;
 
 pub const APP_ICON: Asset = asset!("/assets/icons/app-icon.png");
@@ -77,16 +80,18 @@ pub fn SidePanel() -> Element {
         }
     };
 
-    let sp_cloud = rsx! {
-        SpCloud {
-            label: "iCloud".to_string(),
-            icon: rsx! {Icon {data: arcticons::IcloudDrive, width: "20", height: "20", color: "#4a90d9"} },
-        },
-        SpCloud {
-            label: "iCloud".to_string(),
-            icon: rsx! {Icon {data: simple_icons::Googledrive, width: "20", height: "20", color: "#4a90d9"} },
-        }
-    };
+    let sp_cloud: Vec<(String, Element, Element)> = vec![
+        (
+            "iCloud".to_string(),
+            rsx! {Icon {data: arcticons::IcloudDrive, width: "20", height: "20", color: GREY} },
+            rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: GREY} },
+        ),
+        (
+            "Google Drive".to_string(),
+            rsx! {Icon {data: simple_icons::Googledrive, width: "20", height: "20", color: GREY} },
+            rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: GREY} },
+        ),
+    ];
 
     rsx! {
         style { "{side_panel_style()}"},
@@ -113,7 +118,12 @@ pub fn SidePanel() -> Element {
                     children: dropdown_items.clone()
                 }
             }
-            div { class: "sp-cloud-container", {sp_cloud} }
+            div{
+                class: "sp-cloud-wrapper",
+                for (label, icon, open_icon) in sp_cloud {
+                    SpCloud { label: label.to_string(), icon, open_icon }
+                }
+            }
             div{
                 class: "drive-list-container",
                 for (label, icon) in drive_list {
