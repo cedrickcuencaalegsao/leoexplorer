@@ -62,7 +62,7 @@ lint:
 # ── Icon management ────────────────────────────────────────────────────────
 # Usage: make add-icon ICONS="material-symbols:home-outline"
 #        make add-icon ICONS="mdi:home mdi:account"
-ICONS ?=                       # default empty if not provided
+ICON ?=                       # default empty if not provided
 
 add-icon:
 	@if [ -z "$(ICONS)" ]; then \
