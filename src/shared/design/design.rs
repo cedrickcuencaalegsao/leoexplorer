@@ -120,13 +120,14 @@ pub fn title_bar_style() -> String {
         .tab-strip {{
             display: flex;
             align-items: center;
-            flex: 1;
+            flex: 0 1 auto;
             min-width: 0;
             overflow: hidden;
         }}
 
         .titlebar-spacer {{
             flex: 1;
+            min-width: 20px;
         }}
 
         .tab {{
@@ -136,6 +137,7 @@ pub fn title_bar_style() -> String {
             height: 30px;
             flex: 1 1 170px;
             min-width: 0;
+            width: 170px;
             max-width: 170px;
             margin: 6px;
             padding: 0 12px;
@@ -154,6 +156,18 @@ pub fn title_bar_style() -> String {
             white-space: nowrap;
             min-width: 0;
             flex: 1;
+            font-family: 'GoogleSans', Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #5f6368;
+            transition: color 0.15s ease;
+        }}
+        .tab.active span {{
+            color: #1a1a1a;
+            font-weight: 600;
+        }}
+        .tab:hover span {{
+            color: #1a1a1a;
         }}
         .tab-close {{
             background: transparent;
@@ -171,7 +185,8 @@ pub fn title_bar_style() -> String {
             border: none;
             background: transparent;
             cursor: pointer;
-            /* stays fixed size, never shrinks, always after tabs */
+            font-size: 18px;
+            margin: 10px;
         }}
         .window-controls button:hover {{
             background: rgba(0,0,0,0.08);
