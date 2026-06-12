@@ -99,6 +99,58 @@ pub fn secondary_button_style() -> String {
 }
 
 #[allow(dead_code)]
+pub fn title_bar_style() -> String {
+    format! {
+        ".title-bar {{
+            display: flex;
+            align-items: stretch;
+            height: 36px;
+            background: #dee1e6;
+            user-select: none;
+        }}
+
+        .tab-strip {{
+            display: flex;
+            align-items: center;
+        }}
+
+        .titlebar-spacer {{
+            flex: 1;
+        }}
+
+        .tab {{
+            display: flex;
+            align-items: center;
+            height: 30px;
+            margin-top: 6px;
+            padding: 0 12px;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            max-width: 200px;
+        }}
+
+        .tab.active {{
+            background: #fff;
+        }}
+
+        .window-controls {{
+            display: flex;
+        }}
+
+        .window-controls button {{
+            width: 46px;
+            border: none;
+            background: transparent;
+        }}
+
+        .window-controls button:hover {{
+            background: rgba(0,0,0,0.08);
+        }}
+        "
+    }
+}
+
+#[allow(dead_code)]
 pub fn side_panel_style() -> String {
     format! {
         ".side-panel {{
