@@ -203,12 +203,53 @@ pub fn macos_control_style() -> String {
     format! {
         ".window-controls {{
             display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 50px;
+            padding: 0 12px;
         }}
-
         .window-controls button {{
-            width: 46px;
+            width: 12px;
+            height: 12px;
+            min-width: 12px;
+            padding: 0;
             border: none;
-            background: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            // -webkit-app-region: no-drag;
+        }}
+        .window-controls button svg {{
+            opacity: 0;
+            width: 8px;
+            height: 8px;
+            transition: opacity 0.1s ease;
+        }}
+        .window-controls:hover button svg {{
+            opacity: 1;
+        }}
+        .traffic-close {{
+            background: #ff5f57;
+        }}
+        .traffic-close svg {{
+            color: #4d0000;
+        }}
+        .traffic-minimize {{
+            background: #febc2e;
+        }}
+        .traffic-minimize svg {{
+            color: #985700;
+        }}
+        .traffic-restore {{
+            background: #28c840;
+        }}
+        .traffic-restore svg {{
+            color: #006500;
+        }}
+        .window-controls button:active {{
+            filter: brightness(0.85);
         }}"
     }
 }
