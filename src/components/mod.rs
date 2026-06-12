@@ -4,5 +4,7 @@ pub mod sp_cloud;
 pub mod sp_drive;
 pub mod sp_items;
 pub mod sp_menu;
+pub mod tab_content_view;
+pub mod tab_views;
 pub mod title_bar;
 pub mod window_control;
