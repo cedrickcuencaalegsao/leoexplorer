@@ -4,6 +4,7 @@ use dioxus::prelude::*;
 use crate::components::window_control::WindowControl;
 use crate::shared::{
     design::design::title_bar_style,
+    enums::tab_content::TabContent,
     models::{app_state::AppState, tab::Tab},
 };
 
@@ -54,7 +55,8 @@ pub fn TitleBar() -> Element {
                         tabs.write().push(
                             Tab{
                                 id: new_id,
-                                title: "new tab".into(), path: "".into()
+                                title: "new tab".into(),
+                                content: TabContent::Welcome,
                             }
                         );
                     },

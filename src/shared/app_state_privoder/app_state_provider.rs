@@ -1,3 +1,4 @@
+use crate::shared::enums::tab_content::TabContent;
 use crate::shared::models::{app_state::AppState, tab::Tab};
 use dioxus::prelude::*;
 
@@ -9,7 +10,7 @@ pub fn AppStateProvider(children: Element) -> Element {
             vec![Tab {
                 id: 0,
                 title: "New Tab".into(),
-                path: "".into(),
+                content: TabContent::Welcome,
             }]
         }),
         active_tab: use_signal(|| 0),

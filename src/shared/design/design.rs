@@ -43,13 +43,14 @@ pub fn main_style() -> String {
             font-family: 'GoogleSans', Arial, sans-serif;
         }}
         main {{
-            height: 100vh;
+            position: relative;
+            height: calc(100vh - 36px);
             margin: 0;
             padding: 0;
         }}
         .app-container {{
             display: flex;
-            height: 100vh;
+            height: 100%;
             background-color: #EAEAEA;
         }}
         .side-panel-container {{
@@ -63,9 +64,16 @@ pub fn main_style() -> String {
             color: #0a1931;
         }}
         .main-panel-container {{
+            position: relative;
             flex: 1;
             min-width: 300px;
             background-color: #f6fafd;
+        }}
+        .tab-view{{
+            position: absolute; inset: 0; display: none;
+        }}
+        .tab-view.active {{
+            display: block;
         }}
         .preview-panel-container {{
             width: 100%;
