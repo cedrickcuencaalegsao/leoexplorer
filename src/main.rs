@@ -1,6 +1,7 @@
 mod app;
 mod components;
 mod icons;
+mod main_content_manager;
 mod shared;
 
 use app::App;

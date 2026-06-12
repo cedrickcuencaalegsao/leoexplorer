@@ -43,13 +43,14 @@ pub fn main_style() -> String {
             font-family: 'GoogleSans', Arial, sans-serif;
         }}
         main {{
-            height: 100vh;
+            position: relative;
+            height: calc(100vh - 36px);
             margin: 0;
             padding: 0;
         }}
         .app-container {{
             display: flex;
-            height: 100vh;
+            height: 100%;
             background-color: #EAEAEA;
         }}
         .side-panel-container {{
@@ -63,9 +64,16 @@ pub fn main_style() -> String {
             color: #0a1931;
         }}
         .main-panel-container {{
+            position: relative;
             flex: 1;
             min-width: 300px;
             background-color: #f6fafd;
+        }}
+        .tab-view{{
+            position: absolute; inset: 0; display: none;
+        }}
+        .tab-view.active {{
+            display: block;
         }}
         .preview-panel-container {{
             width: 100%;
@@ -96,6 +104,113 @@ pub fn secondary_button_style() -> String {
         "background-color: transparent; border: 2px solid {}; font-size: {}; border-radius: {};",
         PRIMARY_COLOR, FONT_SIZE, BORDER_RADIUS
     )
+}
+
+#[allow(dead_code)]
+pub fn title_bar_style() -> String {
+    format! {
+        ".title-bar {{
+            display: flex;
+            align-items: stretch;
+            height: 36px;
+            background: #dee1e6;
+            user-select: none;
+        }}
+
+        .tab-strip {{
+            display: flex;
+            align-items: center;
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }}
+
+        .titlebar-spacer {{
+            flex: 1;
+        }}
+
+        .tab {{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 30px;
+            flex: 1 1 170px;
+            min-width: 0;
+            max-width: 170px;
+            margin: 6px;
+            padding: 0 12px;
+            cursor: pointer;
+            border-right: 1px solid GREY;
+        }}
+        .tab.active {{
+            border-left: none;
+            border-right: none;
+            border-radius: 8px;
+            background: #fff;
+        }}
+        .tab span {{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0;
+            flex: 1;
+        }}
+        .tab-close {{
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }}
+        .tab-new {{
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            /* stays fixed size, never shrinks, always after tabs */
+        }}
+        .window-controls button:hover {{
+            background: rgba(0,0,0,0.08);
+        }}
+        "
+    }
+}
+
+#[allow(dead_code)]
+pub fn windows_control_style() -> String {
+    format! {
+        ".window-controls {{
+            display: flex;
+        }}"
+    }
+}
+
+#[allow(dead_code)]
+pub fn linux_control_style() -> String {
+    format! {
+        ".window-controls {{
+            display: flex;
+        }}"
+    }
+}
+
+#[allow(dead_code)]
+pub fn macos_control_style() -> String {
+    format! {
+        ".window-controls {{
+            display: flex;
+        }}
+
+        .window-controls button {{
+            width: 46px;
+            border: none;
+            background: transparent;
+        }}"
+    }
 }
 
 #[allow(dead_code)]

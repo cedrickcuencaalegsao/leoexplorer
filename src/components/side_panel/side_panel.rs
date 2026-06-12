@@ -11,6 +11,7 @@ pub const APP_ICON: Asset = asset!("/assets/icons/app-icon.png");
 
 #[component]
 pub fn SidePanel() -> Element {
+    let expand_sp_menu = use_signal(|| Vec::<String>::new());
     let sp_menu: Vec<(&str, Element)> = vec![
         (
             "Home",
@@ -115,7 +116,8 @@ pub fn SidePanel() -> Element {
                 SpMenu {
                     label: label.to_string(),
                     icon,
-                    children: dropdown_items.clone()
+                    children: dropdown_items.clone(),
+                    expand_sp_menu,
                 }
             }
             div{
