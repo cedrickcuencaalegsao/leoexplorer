@@ -55,7 +55,7 @@ pub fn main_style() -> String {
         }}
         .side-panel-container {{
             width: 15%;
-            min-width: 180px;
+            min-width: 220px;
             background-color: #ffffff;
             overflow: hidden;
             display: flex;
@@ -66,7 +66,7 @@ pub fn main_style() -> String {
         .main-panel-container {{
             position: relative;
             flex: 1;
-            min-width: 300px;
+            min-width: 500px;
             background-color: #f6fafd;
         }}
         .tab-view{{
@@ -77,7 +77,7 @@ pub fn main_style() -> String {
         }}
         .preview-panel-container {{
             width: 100%;
-            max-width: 500px;
+            max-width: 300px;
             background-color: #b3cfe5;
         }}
         .dynamic-sidebar-container {{
@@ -86,7 +86,6 @@ pub fn main_style() -> String {
             background-color: #ffffff;
         }}
         "
-
     }
 }
 
@@ -277,7 +276,6 @@ pub fn side_panel_style() -> String {
             height: 100%;
             overflow-y: auto;
             padding-right: 10px;
-
             /* Firefox */
             scrollbar-width: thin;
             scrollbar-color: rgba(0,0,0,0.2) transparent;
