@@ -284,44 +284,26 @@ pub fn side_panel_style() -> String {
         .side-panel::-webkit-scrollbar {{
             width: 5px;
         }}
-
         .side-panel::-webkit-scrollbar-track {{
             background: transparent;
         }}
-
         .side-panel::-webkit-scrollbar-thumb {{
             background: rgba(0,0,0,0.18);
             border-radius: 999px;
         }}
-
         .side-panel::-webkit-scrollbar-thumb:hover {{
             background: rgba(0,0,0,0.3);
         }}
-        .app-name-and-icon-container{{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 10px;
+        .sp-header {{
+            font-size: 14px;
+            font-weight: bold;
+            color: {GREY};
+            margin-left: 10px;
         }}
-        .app-icon img{{
-            width: 35px;
-            height: 35px;
+        .library-wrapper, .sp-cloud-wrapper, .drive-list-container{{
+            margin-left: 17px;
         }}
-        .app-name {{
-            font-size: {FONT_SIZE};
-            color: {DARK_BLUE};
-            font-weight: 700;
-            font-family: Google Sans, sans-serif;
-            font-style: italic;
-            font-size: 18px;
-        }}
-        .sp-cloud-wrapper {{
-            margin-top: 20px;
-        }}
-        .drive-list-container {{
-            margin-top: 30px;
-        }}"
+        "
     }
 }
 

@@ -7,8 +7,6 @@ use crate::shared::{
 };
 use dioxus::prelude::*;
 
-pub const APP_ICON: Asset = asset!("/assets/icons/app-icon.png");
-
 #[component]
 pub fn SidePanel() -> Element {
     let expand_sp_menu = use_signal(|| Vec::<String>::new());
@@ -99,37 +97,43 @@ pub fn SidePanel() -> Element {
         div{
             class: "side-panel",
             div{
-                class: "app-name-and-icon-container",
+                class: "library",
                 div{
-                    class: "app-icon",
-                    img {
-                        src: APP_ICON,
-                    }
+                    class: "sp-header",
+                    p { "Library" }
                 }
                 div{
-                    class: "app-name",
-                    "Leo Explorer"
+                    class: "library-wrapper",
+                    for (label, icon) in sp_menu {
+                        SpMenu {
+                            label: label.to_string(),
+                            icon,
+                            children: dropdown_items.clone(),
+                            expand_sp_menu,
+                        }
+                    }
                 }
             }
 
-            for (label, icon) in sp_menu {
-                SpMenu {
-                    label: label.to_string(),
-                    icon,
-                    children: dropdown_items.clone(),
-                    expand_sp_menu,
+            div{
+                class: "remote",
+                p { class: "sp-header", "Remote" }
+                div{
+                    class: "sp-cloud-wrapper",
+                    for (label, icon, open_icon) in sp_cloud {
+                        SpCloud { label: label.to_string(), icon, open_icon }
+                    }
                 }
             }
+
             div{
-                class: "sp-cloud-wrapper",
-                for (label, icon, open_icon) in sp_cloud {
-                    SpCloud { label: label.to_string(), icon, open_icon }
-                }
-            }
-            div{
-                class: "drive-list-container",
-                for (label, icon) in drive_list {
-                    SpDrive { label: label.to_string(), icon }
+                class: "drive",
+                p { class: "sp-header", "Drive" }
+                div{
+                    class: "drive-list-container",
+                    for (label, icon) in drive_list {
+                        SpDrive { label: label.to_string(), icon }
+                    }
                 }
             }
         }
