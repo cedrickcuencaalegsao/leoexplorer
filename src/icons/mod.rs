@@ -38,6 +38,7 @@ pub fn Icon(
 }
 
 pub mod arcticons;
+pub mod basil;
 pub mod bxs;
 pub mod fluent;
 pub mod line_md;

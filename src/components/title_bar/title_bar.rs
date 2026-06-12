@@ -13,14 +13,16 @@ pub fn TitleBar() -> Element {
     let mut tabs = state.tabs;
     let mut active = state.active_tab;
     let tab_list = tabs.read().clone();
+    let is_windows = use_signal(|| false);
 
     rsx! {
         style { "{title_bar_style()}" }
         div{
-
             class: "title-bar",
             "data-tauri-drag-region": "true",
-
+            if !is_windows() {
+                WindowControl {  }
+            }
             div{
                 class: "tab-strip",
                 for tab in tab_list.into_iter() {
@@ -64,7 +66,9 @@ pub fn TitleBar() -> Element {
             div {
                 class:"title-bar-spacer"
             },
-            WindowControl {  }
+            if is_windows() {
+                WindowControl {  }
+            }
         }
     }
 }
