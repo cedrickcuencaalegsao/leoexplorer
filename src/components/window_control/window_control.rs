@@ -1,4 +1,7 @@
 use crate::icons::*;
+use crate::shared::design::design::{
+    linux_control_style, macos_control_style, windows_control_style,
+};
 #[allow(non_snake_case)]
 use dioxus::prelude::*;
 use serde_json::*;
@@ -6,8 +9,22 @@ use serde_json::*;
 #[component]
 pub fn WindowControl() -> Element {
     let is_maximized = use_signal(|| false);
+    let is_windows = use_signal(|| false);
+    let is_linux = use_signal(|| false);
+    let is_macos = use_signal(|| true);
+
+    let controls_style = if is_macos() {
+        macos_control_style()
+    } else if is_windows() {
+        windows_control_style()
+    } else if is_linux() {
+        linux_control_style()
+    } else {
+        String::new()
+    };
 
     rsx! {
+        style { "{controls_style}" }
         div {
             class: "window-controls",
             button {

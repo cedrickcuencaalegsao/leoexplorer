@@ -1,12 +1,12 @@
-#[allow(non_snake_case)]
-use dioxus::prelude::*;
-
 use crate::components::window_control::WindowControl;
+use crate::icons::*;
 use crate::shared::{
     design::design::title_bar_style,
     enums::tab_content::TabContent,
     models::{app_state::AppState, tab::Tab},
 };
+#[allow(non_snake_case)]
+use dioxus::prelude::*;
 
 #[component]
 pub fn TitleBar() -> Element {
@@ -39,11 +39,23 @@ pub fn TitleBar() -> Element {
                             class: "tab-close",
                             onclick: move |event| {
                                 event.stop_propagation();
-                                tabs.write().retain(|t| t.id != tab.id);
+                                let closing_id = tab.id;
+                                let was_active = *active.read() == closing_id;
+
+                                let mut tabs_mut = tabs.write();
+                                let pos = tabs_mut.iter().position(|t| t.id == closing_id);
+                                tabs_mut.retain(|t| t.id != closing_id);
+
+                                if was_active{
+                                    if let Some(pos) = pos{
+                                        let new_active = tabs_mut.get(pos).or_else(|| tabs_mut.last()).map(|t| t.id);
+                                        if let Some(id) = new_active{
+                                            active.set(id);
+                                        }
+                                    }
+                                }
                             },
-                            span{
-                                "x"
-                            }
+                            Icon{ data: material_symbols::CloseRounded, width: "12", height: "12" }
                         }
                     }
                 }
@@ -55,14 +67,13 @@ pub fn TitleBar() -> Element {
                         tabs.write().push(
                             Tab{
                                 id: new_id,
-                                title: "new tab".into(),
+                                title: "New tab".into(),
                                 content: TabContent::Welcome,
                             }
                         );
+                        active.set(new_id);
                     },
-                    span{
-                        "+"
-                    }
+                    Icon{ data: material_symbols::AddRounded, width: "12", height: "12" }
                 }
             },
             div {

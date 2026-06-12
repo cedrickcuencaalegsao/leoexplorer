@@ -120,6 +120,9 @@ pub fn title_bar_style() -> String {
         .tab-strip {{
             display: flex;
             align-items: center;
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
         }}
 
         .titlebar-spacer {{
@@ -129,19 +132,76 @@ pub fn title_bar_style() -> String {
         .tab {{
             display: flex;
             align-items: center;
+            justify-content: space-between;
             height: 30px;
-            margin-top: 6px;
+            flex: 1 1 170px;
+            min-width: 0;
+            max-width: 170px;
+            margin: 6px;
             padding: 0 12px;
-            border-radius: 8px 8px 0 0;
             cursor: pointer;
-            max-width: 200px;
+            border-right: 1px solid GREY;
         }}
-
         .tab.active {{
+            border-left: none;
+            border-right: none;
+            border-radius: 8px;
             background: #fff;
         }}
+        .tab span {{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0;
+            flex: 1;
+        }}
+        .tab-close {{
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }}
+        .tab-new {{
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            /* stays fixed size, never shrinks, always after tabs */
+        }}
+        .window-controls button:hover {{
+            background: rgba(0,0,0,0.08);
+        }}
+        "
+    }
+}
 
-        .window-controls {{
+#[allow(dead_code)]
+pub fn windows_control_style() -> String {
+    format! {
+        ".window-controls {{
+            display: flex;
+        }}"
+    }
+}
+
+#[allow(dead_code)]
+pub fn linux_control_style() -> String {
+    format! {
+        ".window-controls {{
+            display: flex;
+        }}"
+    }
+}
+
+#[allow(dead_code)]
+pub fn macos_control_style() -> String {
+    format! {
+        ".window-controls {{
             display: flex;
         }}
 
@@ -149,12 +209,7 @@ pub fn title_bar_style() -> String {
             width: 46px;
             border: none;
             background: transparent;
-        }}
-
-        .window-controls button:hover {{
-            background: rgba(0,0,0,0.08);
-        }}
-        "
+        }}"
     }
 }
 
