@@ -55,7 +55,7 @@ pub fn main_style() -> String {
         }}
         .side-panel-container {{
             width: 15%;
-            min-width: 180px;
+            min-width: 220px;
             background-color: #ffffff;
             overflow: hidden;
             display: flex;
@@ -66,7 +66,7 @@ pub fn main_style() -> String {
         .main-panel-container {{
             position: relative;
             flex: 1;
-            min-width: 300px;
+            min-width: 500px;
             background-color: #f6fafd;
         }}
         .tab-view{{
@@ -77,7 +77,7 @@ pub fn main_style() -> String {
         }}
         .preview-panel-container {{
             width: 100%;
-            max-width: 500px;
+            max-width: 300px;
             background-color: #b3cfe5;
         }}
         .dynamic-sidebar-container {{
@@ -86,7 +86,6 @@ pub fn main_style() -> String {
             background-color: #ffffff;
         }}
         "
-
     }
 }
 
@@ -120,13 +119,14 @@ pub fn title_bar_style() -> String {
         .tab-strip {{
             display: flex;
             align-items: center;
-            flex: 1;
+            flex: 0 1 auto;
             min-width: 0;
             overflow: hidden;
         }}
 
         .titlebar-spacer {{
             flex: 1;
+            min-width: 20px;
         }}
 
         .tab {{
@@ -136,6 +136,7 @@ pub fn title_bar_style() -> String {
             height: 30px;
             flex: 1 1 170px;
             min-width: 0;
+            width: 170px;
             max-width: 170px;
             margin: 6px;
             padding: 0 12px;
@@ -154,6 +155,18 @@ pub fn title_bar_style() -> String {
             white-space: nowrap;
             min-width: 0;
             flex: 1;
+            font-family: 'GoogleSans', Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #5f6368;
+            transition: color 0.15s ease;
+        }}
+        .tab.active span {{
+            color: #1a1a1a;
+            font-weight: 600;
+        }}
+        .tab:hover span {{
+            color: #1a1a1a;
         }}
         .tab-close {{
             background: transparent;
@@ -171,7 +184,8 @@ pub fn title_bar_style() -> String {
             border: none;
             background: transparent;
             cursor: pointer;
-            /* stays fixed size, never shrinks, always after tabs */
+            font-size: 18px;
+            margin: 10px;
         }}
         .window-controls button:hover {{
             background: rgba(0,0,0,0.08);
@@ -203,12 +217,53 @@ pub fn macos_control_style() -> String {
     format! {
         ".window-controls {{
             display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 50px;
+            padding: 0 12px;
         }}
-
         .window-controls button {{
-            width: 46px;
+            width: 12px;
+            height: 12px;
+            min-width: 12px;
+            padding: 0;
             border: none;
-            background: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            // -webkit-app-region: no-drag;
+        }}
+        .window-controls button svg {{
+            opacity: 0;
+            width: 8px;
+            height: 8px;
+            transition: opacity 0.1s ease;
+        }}
+        .window-controls:hover button svg {{
+            opacity: 1;
+        }}
+        .traffic-close {{
+            background: #ff5f57;
+        }}
+        .traffic-close svg {{
+            color: #4d0000;
+        }}
+        .traffic-minimize {{
+            background: #febc2e;
+        }}
+        .traffic-minimize svg {{
+            color: #985700;
+        }}
+        .traffic-restore {{
+            background: #28c840;
+        }}
+        .traffic-restore svg {{
+            color: #006500;
+        }}
+        .window-controls button:active {{
+            filter: brightness(0.85);
         }}"
     }
 }
@@ -221,7 +276,6 @@ pub fn side_panel_style() -> String {
             height: 100%;
             overflow-y: auto;
             padding-right: 10px;
-
             /* Firefox */
             scrollbar-width: thin;
             scrollbar-color: rgba(0,0,0,0.2) transparent;
@@ -230,44 +284,26 @@ pub fn side_panel_style() -> String {
         .side-panel::-webkit-scrollbar {{
             width: 5px;
         }}
-
         .side-panel::-webkit-scrollbar-track {{
             background: transparent;
         }}
-
         .side-panel::-webkit-scrollbar-thumb {{
             background: rgba(0,0,0,0.18);
             border-radius: 999px;
         }}
-
         .side-panel::-webkit-scrollbar-thumb:hover {{
             background: rgba(0,0,0,0.3);
         }}
-        .app-name-and-icon-container{{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 10px;
+        .sp-header {{
+            font-size: 14px;
+            font-weight: bold;
+            color: {GREY};
+            margin-left: 10px;
         }}
-        .app-icon img{{
-            width: 35px;
-            height: 35px;
+        .library-wrapper, .sp-cloud-wrapper, .drive-list-container{{
+            margin-left: 17px;
         }}
-        .app-name {{
-            font-size: {FONT_SIZE};
-            color: {DARK_BLUE};
-            font-weight: 700;
-            font-family: Google Sans, sans-serif;
-            font-style: italic;
-            font-size: 18px;
-        }}
-        .sp-cloud-wrapper {{
-            margin-top: 20px;
-        }}
-        .drive-list-container {{
-            margin-top: 30px;
-        }}"
+        "
     }
 }
 
@@ -385,20 +421,72 @@ pub fn sp_items_style() -> String {
 pub fn sp_drive_style() -> String {
     format! {
         ".sp-drive {{
-            margin: 10px 0;
-            cursor: pointer;
-        }}
-        .sp-drive-children {{
             display: flex;
-            flex-direction: row;
             align-items: center;
-            gap:8px;
+            gap: 8px;
+            padding: 6px 0;
+            --drive-used-color: #332f6b;
+            --drive-free-color: #e0e0e0;
         }}
         .sp-drive-icon {{
-            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #1a1a1a;
+        }}
+        .sp-drive-info {{
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 0;
         }}
         .sp-drive-label {{
-            font-size: 14px;
+            font-size: 12px;
+            font-weight: 700;
+            font-style: italic;
+            color: #1a1a1a;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }}
+        .sp-drive-bar {{
+            width: 100%;
+            height: 5px;
+            border-radius: 999px;
+            background: var(--drive-free-color);
+            overflow: hidden;
+        }}
+        .sp-drive-bar-used {{
+            height: 100%;
+            border-radius: 999px;
+            background: var(--drive-used-color);
+            transition: width 0.3s ease;
+        }}
+        .sp-drive-stats {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 9px;
+            color: #999;
+        }}
+        .sp-drive-stat {{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }}
+        .sp-drive-dot {{
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }}
+        .sp-drive-dot-free {{
+            background: #b3b3b3;
+        }}
+        .sp-drive-dot-used {{
+            background: var(--drive-used-color);
         }}"
     }
 }

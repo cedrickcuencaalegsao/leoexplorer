@@ -26,6 +26,7 @@ pub fn TitleBar() -> Element {
             }
             div{
                 class: "tab-strip",
+                "data-tauri-drag-region": "true",
                 for tab in tab_list.into_iter() {
                     div{
                         key: "{tab.id}",

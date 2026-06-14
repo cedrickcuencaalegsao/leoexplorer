@@ -27,47 +27,77 @@ pub fn WindowControl() -> Element {
         style { "{controls_style}" }
         div {
             class: "window-controls",
-            button {
-                onclick: move |_| {
-                    document::eval(
-                        "window.__TAURI__.window.getCurrentWindow().minimize()"
-                    );
-                },
-                Icon{data: material_symbols::MinimizeRounded, width:20, height:20}
+            if is_macos() {
+                CloseButton {  }
+                MinimizeButton {  }
+                RestoreButton { is_maximized }
+            } else {
+                MinimizeButton{},
+                RestoreButton{is_maximized},
+                CloseButton {}
+            }
+        }
+    }
+}
+
+#[component]
+fn MinimizeButton() -> Element {
+    rsx! {
+        button {
+            class: "traffic-minimize",
+            onclick: move |_| {
+                document::eval(
+                    "window.__TAURI__.window.getCurrentWindow().minimize()"
+                );
             },
-            button {
-                onclick: move |_| {
-                    let mut is_max = is_maximized.clone();
-                    async move {
-                        let res = document::eval(
-                            r#"
-                                const win = window.__TAURI__.window.getCurrentWindow();
-                                const max = await win.isMaximized();
-                                if (max) { await win.unmaximize(); } else { await win.maximize(); }
-                                return !max;
-                            "#
-                        ).await;
-                        if let Ok(val) = res {
-                            if let Ok(new_state) = from_value::<bool>(val) {
-                                is_max.set(new_state);
-                            }
+            Icon{data: material_symbols::MinimizeRounded, width:20, height:20}
+        }
+    }
+}
+
+#[component]
+fn RestoreButton(mut is_maximized: Signal<bool>) -> Element {
+    rsx! {
+        button {
+            class: "traffic-restore",
+            onclick: move |_| {
+                let mut is_max = is_maximized;
+                async move {
+                    let res = document::eval(
+                        r#"
+                            const win = window.__TAURI__.window.getCurrentWindow();
+                            const max = await win.isMaximized();
+                            if (max) { await win.unmaximize(); } else { await win.maximize(); }
+                            return !max;
+                        "#
+                    ).await;
+                    if let Ok(val) = res {
+                        if let Ok(new_state) = from_value::<bool>(val) {
+                            is_max.set(new_state);
                         }
                     }
-                },
-                if is_maximized() {
-                    Icon{data: basil::ExpandOutline, width:20, height:20}
-                } else {
-                    Icon{data: basil::ExpandOutline, width:20, height:20}
                 }
             },
-            button {
-                onclick: move |_| {
-                    document::eval(
-                        "window.__TAURI__.window.getCurrentWindow().close()"
-                    );
-                },
-                Icon{data: material_symbols::CloseRounded, width:20, height:20}
+            if is_maximized() {
+                Icon{data: basil::ExpandOutline, width:20, height:20}
+            } else {
+                Icon{data: basil::ExpandOutline, width:20, height:20}
+            }
+        },
+    }
+}
+
+#[component]
+fn CloseButton() -> Element {
+    rsx! {
+        button {
+            class: "traffic-close",
+            onclick: move |_| {
+                document::eval(
+                    "window.__TAURI__.window.getCurrentWindow().close()"
+                );
             },
+            Icon{data: material_symbols::CloseRounded, width:20, height:20}
         }
     }
 }
