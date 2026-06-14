@@ -45,18 +45,24 @@ pub fn SidePanel() -> Element {
         ),
     ];
 
-    let drive_list: Vec<(&str, Element)> = vec![
+    let drive_list: Vec<(&str, Element, f64, f64)> = vec![
         (
             "Drive 1:",
-            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "20", height: "20"} },
+            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "26", height: "26"} },
+            50.0,
+            100.0,
         ),
         (
             "Drive 2:",
-            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "20", height: "20"} },
+            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "26", height: "26"} },
+            75.0,
+            100.0,
         ),
         (
             "Drive 3 :",
-            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "20", height: "20"} },
+            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "26", height: "26"} },
+            25.0,
+            100.0,
         ),
     ];
 
@@ -131,8 +137,8 @@ pub fn SidePanel() -> Element {
                 p { class: "sp-header", "Drive" }
                 div{
                     class: "drive-list-container",
-                    for (label, icon) in drive_list {
-                        SpDrive { label: label.to_string(), icon }
+                    for (label, icon, used_gb, total_gb) in drive_list {
+                        SpDrive { label: label.to_string(), icon, used_gb, total_gb  }
                     }
                 }
             }

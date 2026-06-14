@@ -421,20 +421,72 @@ pub fn sp_items_style() -> String {
 pub fn sp_drive_style() -> String {
     format! {
         ".sp-drive {{
-            margin: 10px 0;
-            cursor: pointer;
-        }}
-        .sp-drive-children {{
             display: flex;
-            flex-direction: row;
             align-items: center;
-            gap:8px;
+            gap: 8px;
+            padding: 6px 0;
+            --drive-used-color: #332f6b;
+            --drive-free-color: #e0e0e0;
         }}
         .sp-drive-icon {{
-            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #1a1a1a;
+        }}
+        .sp-drive-info {{
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 0;
         }}
         .sp-drive-label {{
-            font-size: 14px;
+            font-size: 12px;
+            font-weight: 700;
+            font-style: italic;
+            color: #1a1a1a;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }}
+        .sp-drive-bar {{
+            width: 100%;
+            height: 5px;
+            border-radius: 999px;
+            background: var(--drive-free-color);
+            overflow: hidden;
+        }}
+        .sp-drive-bar-used {{
+            height: 100%;
+            border-radius: 999px;
+            background: var(--drive-used-color);
+            transition: width 0.3s ease;
+        }}
+        .sp-drive-stats {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 9px;
+            color: #999;
+        }}
+        .sp-drive-stat {{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }}
+        .sp-drive-dot {{
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }}
+        .sp-drive-dot-free {{
+            background: #b3b3b3;
+        }}
+        .sp-drive-dot-used {{
+            background: var(--drive-used-color);
         }}"
     }
 }
