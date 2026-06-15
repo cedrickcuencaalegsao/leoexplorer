@@ -19,6 +19,13 @@ pub fn TabContentView(tab: Tab, is_active: bool) -> Element {
                 is_active,
             }
         },
+        TabContent::GMail => rsx! {
+            CloudWebview {
+                url: "https://mail.google.com",
+                label: "gmail",
+                is_active,
+            }
+        },
         _ => rsx! {
             div {
                 class: "app-container",

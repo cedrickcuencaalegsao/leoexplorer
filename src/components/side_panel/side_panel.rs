@@ -8,6 +8,9 @@ use crate::shared::{
     models::{app_state::AppState, tab::Tab},
 };
 use dioxus::prelude::*;
+const ICLOUD_ICONS: Asset = asset!("/assets/icons/apple-icons/iCloud.png");
+const GDRIVE_ICONS: Asset = asset!("/assets/icons/google-icons/googledrive.png");
+const GMAIL_ICONS: Asset = asset!("/assets/icons/google-icons/gmail.png");
 
 #[component]
 pub fn SidePanel() -> Element {
@@ -94,15 +97,21 @@ pub fn SidePanel() -> Element {
     let sp_cloud: Vec<(String, Element, Element, TabContent)> = vec![
         (
             "iCloud".to_string(),
-            rsx! {Icon {data: arcticons::IcloudDrive, width: "20", height: "20", color: GREY} },
+            rsx! {img {src: ICLOUD_ICONS, width: "20", height: "20"}},
             rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: GREY} },
             TabContent::ICloud,
         ),
         (
             "Google Drive".to_string(),
-            rsx! {Icon {data: simple_icons::Googledrive, width: "20", height: "20", color: GREY} },
+            rsx! {img {src: GDRIVE_ICONS, width: "20", height: "20"}},
             rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: GREY} },
             TabContent::GDrive,
+        ),
+        (
+            "Gmail".to_string(),
+            rsx! {img {src: GMAIL_ICONS, width: "20", height: "20"}},
+            rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: GREY} },
+            TabContent::GMail,
         ),
     ];
 
