@@ -4,8 +4,13 @@ use crate::icons::*;
 use crate::shared::{
     constant::constant::{FOLDER_COLOR, GREY},
     design::design::side_panel_style,
+    enums::tab_content::TabContent,
+    models::{app_state::AppState, tab::Tab},
 };
 use dioxus::prelude::*;
+const ICLOUD_ICONS: Asset = asset!("/assets/icons/apple-icons/iCloud.png");
+const GDRIVE_ICONS: Asset = asset!("/assets/icons/google-icons/googledrive.png");
+const GMAIL_ICONS: Asset = asset!("/assets/icons/google-icons/gmail.png");
 
 #[component]
 pub fn SidePanel() -> Element {
@@ -45,22 +50,26 @@ pub fn SidePanel() -> Element {
         ),
     ];
 
+    let state = use_context::<AppState>();
+    let mut tabs = state.tabs;
+    let mut active_tabs = state.active_tab;
+
     let drive_list: Vec<(&str, Element, f64, f64)> = vec![
         (
             "Drive 1:",
-            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "26", height: "26"} },
+            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "20", height: "20"} },
             50.0,
             100.0,
         ),
         (
             "Drive 2:",
-            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "26", height: "26"} },
+            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "20", height: "20"} },
             75.0,
             100.0,
         ),
         (
             "Drive 3 :",
-            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "26", height: "26"} },
+            rsx! {Icon {data: material_symbols::HardDriveOutline, width: "20", height: "20"} },
             25.0,
             100.0,
         ),
@@ -85,18 +94,31 @@ pub fn SidePanel() -> Element {
         }
     };
 
-    let sp_cloud: Vec<(String, Element, Element)> = vec![
+    let sp_cloud: Vec<(String, Element, Element, TabContent)> = vec![
         (
             "iCloud".to_string(),
-            rsx! {Icon {data: arcticons::IcloudDrive, width: "20", height: "20", color: GREY} },
+            rsx! {img {src: ICLOUD_ICONS, width: "20", height: "20"}},
             rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: GREY} },
+            TabContent::ICloud,
         ),
         (
             "Google Drive".to_string(),
-            rsx! {Icon {data: simple_icons::Googledrive, width: "20", height: "20", color: GREY} },
+            rsx! {img {src: GDRIVE_ICONS, width: "20", height: "20"}},
             rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: GREY} },
+            TabContent::GDrive,
+        ),
+        (
+            "Gmail".to_string(),
+            rsx! {img {src: GMAIL_ICONS, width: "20", height: "20"}},
+            rsx! {Icon {data: fluent::WindowNew20Regular, width: "15", height: "15", color: GREY} },
+            TabContent::GMail,
         ),
     ];
+
+    let sp_cloud_data = sp_cloud
+        .into_iter()
+        .map(|(label, icon, open_icon, content)| (label.clone(), label, icon, open_icon, content))
+        .collect::<Vec<_>>();
 
     rsx! {
         style { "{side_panel_style()}"},
@@ -126,8 +148,21 @@ pub fn SidePanel() -> Element {
                 p { class: "sp-header", "Remote" }
                 div{
                     class: "sp-cloud-wrapper",
-                    for (label, icon, open_icon) in sp_cloud {
-                        SpCloud { label: label.to_string(), icon, open_icon }
+                    for (label_tab, label, icon, open_icon, content) in sp_cloud_data {
+                        SpCloud {
+                            label,
+                            icon,
+                            open_icon,
+                            on_activate: move |_| {
+                                let new_id = tabs.read().len();
+                                tabs.write().push(Tab {
+                                    id: new_id,
+                                    title: label_tab.clone(),
+                                    content: content.clone(),
+                                });
+                                active_tabs.set(new_id);
+                            },
+                        }
                     }
                 }
             }
@@ -138,7 +173,7 @@ pub fn SidePanel() -> Element {
                 div{
                     class: "drive-list-container",
                     for (label, icon, used_gb, total_gb) in drive_list {
-                        SpDrive { label: label.to_string(), icon, used_gb, total_gb  }
+                        SpDrive { label: label.to_string(), icon, used_gb, total_gb }
                     }
                 }
             }

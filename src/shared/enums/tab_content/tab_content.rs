@@ -10,5 +10,6 @@ pub enum TabContent {
     Account,
     GMail,
     GDrive,
+    ICloud,
     Dashboard,
 }

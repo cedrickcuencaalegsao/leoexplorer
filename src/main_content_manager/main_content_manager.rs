@@ -13,6 +13,7 @@ pub fn MainContentManager(tab: Tab) -> Element {
             TabContent::Help => rsx! { div { "Help" } },
             TabContent::Account => rsx! { div { "Account" } },
             TabContent::GMail => rsx! { div { "GMail" } },
+            TabContent::ICloud => rsx! { div { "iCloud" } },
             TabContent::GDrive => rsx! { div { "GDrive" } },
             TabContent::Dashboard => rsx! { div { "Dashboard" } },
         }
