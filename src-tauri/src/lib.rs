@@ -4,6 +4,7 @@ use crate::commands::cloud_view::{
 };
 use std::collections::HashMap;
 use std::sync::Mutex;
+use tauri::{TitleBarStyle, WebviewUrl, WebviewWindowBuilder};
 
 mod commands;
 
@@ -19,7 +20,27 @@ pub fn run() {
             hide_cloud_view,
             close_cloud_view,
         ])
+        .setup(|app| {
+            let mut builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::default())
+                .title("Leo Explorer")
+                .inner_size(1200.00, 820.00);
+
+            #[cfg(target_os = "macos")]
+            {
+                builder = builder
+                    .title_bar_style(TitleBarStyle::Overlay)
+                    .hidden_title(true)
+                    .traffic_light_position(tauri::LogicalPosition::new(12.0, 16.0));
+            }
+
+            #[cfg(not(target_os = "macos"))]
+            {
+                builder = builder.decorations(false);
+            }
+
+            builder.build()?;
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
- 

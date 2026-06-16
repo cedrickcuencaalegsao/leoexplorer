@@ -115,39 +115,45 @@ pub fn title_bar_style() -> String {
             background: #dee1e6;
             user-select: none;
         }}
-
+        .traffic-light-spacer {{
+            flex: 0 0 78px;
+        }}
         .tab-strip {{
             display: flex;
             align-items: center;
             flex: 0 1 auto;
             min-width: 0;
             overflow: hidden;
+            padding-left: 4px;
         }}
-
-        .titlebar-spacer {{
+        .title-bar-spacer {{
             flex: 1;
             min-width: 20px;
         }}
-
         .tab {{
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 30px;
+            gap: 8px;
+            height: 34px;
             flex: 1 1 170px;
-            min-width: 0;
+            min-width: 80px;
             width: 170px;
             max-width: 170px;
-            margin: 6px;
-            padding: 0 12px;
+            margin: 6px 3px 0 3px;
+            padding: 0 10px;
             cursor: pointer;
-            border-right: 1px solid GREY;
+            border-radius: 8px 8px 0 0;
+            background: transparent;
+            border-right: 1px solid rgba(0,0,0,0.08);
+            transition: background 0.15s ease;
+        }}
+        .tab:hover {{
+            background: rgba(255, 255, 255, 0.4);
         }}
         .tab.active {{
-            border-left: none;
-            border-right: none;
-            border-radius: 8px;
             background: #fff;
+            border-right: none;
         }}
         .tab span {{
             overflow: hidden;
@@ -169,23 +175,49 @@ pub fn title_bar_style() -> String {
             color: #1a1a1a;
         }}
         .tab-close {{
+            flex: 0 0 auto;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
             background: transparent;
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #5f6368;
+            opacity: 0;
+            transition: background 0.15s ease, opacity 0.1s ease;
+        }}
+        .tab:hover .tab-close, .tab.active .tab-close {{
+            opacity: 1;
+        }}
+        .tab-close:hover {{
+            background: rgba(0, 0, 0, 0.1);
+            color: #1a1a1a;
         }}
         .tab-new {{
             flex: 0 0 auto;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: none;
+            border-radius: 50%;
             background: transparent;
             cursor: pointer;
             font-size: 18px;
-            margin: 10px;
+            color: #5f6368;
+            margin: 6px;
+            transition: background 0.15s ease;
+        }}
+        .tab-new:hover {{
+            background: rgba(0, 0, 0, 0.1);
+        }}
+        .window-controls button {{
+            color: #5f6368;
+            transition: background 0.15s ease;
         }}
         .window-controls button:hover {{
             background: rgba(0,0,0,0.08);
