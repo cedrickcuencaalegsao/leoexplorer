@@ -5,8 +5,19 @@ use crate::shared::{
     enums::tab_content::TabContent,
     models::{app_state::AppState, tab::Tab},
 };
+
 #[allow(non_snake_case)]
 use dioxus::prelude::*;
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen(inline_js = r#"
+export function detectWindows() {
+    return navigator.platform.toLowerCase().includes('win');
+}
+"#)]
+extern "C" {
+    fn detectWindows() -> bool;
+}
 
 #[component]
 pub fn TitleBar() -> Element {
@@ -14,7 +25,11 @@ pub fn TitleBar() -> Element {
     let mut tabs = state.tabs;
     let mut active = state.active_tab;
     let tab_list = tabs.read().clone();
-    let is_windows = use_signal(|| false);
+    let mut is_windows = use_signal(|| false);
+
+    use_effect(move || {
+        is_windows.set(detectWindows());
+    });
 
     rsx! {
         style { "{title_bar_style()}" }
@@ -22,7 +37,7 @@ pub fn TitleBar() -> Element {
             class: "title-bar",
             "data-tauri-drag-region": "true",
             if !is_windows() {
-                WindowControl {  }
+                div { class: "traffic-light-spacer" }
             }
             div{
                 class: "tab-strip",
@@ -42,11 +57,9 @@ pub fn TitleBar() -> Element {
                                 event.stop_propagation();
                                 let closing_id = tab.id;
                                 let was_active = *active.read() == closing_id;
-
                                 let mut tabs_mut = tabs.write();
                                 let pos = tabs_mut.iter().position(|t| t.id == closing_id);
                                 tabs_mut.retain(|t| t.id != closing_id);
-
                                 if was_active{
                                     if let Some(pos) = pos{
                                         let new_active = tabs_mut.get(pos).or_else(|| tabs_mut.last()).map(|t| t.id);

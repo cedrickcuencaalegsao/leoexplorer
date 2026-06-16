@@ -11,14 +11,6 @@
   },
   "app": {
     "withGlobalTauri": true,
-    "windows": [
-      {
-        "title": "Leo Explorer",
-        "width": 1200,
-        "height": 800,
-        "decorations": false
-      }
-    ],
     "security": {
       "csp": null
     }
