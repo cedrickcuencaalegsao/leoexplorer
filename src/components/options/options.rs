@@ -4,7 +4,7 @@ use crate::shared::enums::item_type::ItemType;
 use dioxus::prelude::*;
 
 #[component]
-pub fn FolderOptions(x: f64, y: f64, item_type: ItemType, on_close: EventHandler<()>) -> Element {
+pub fn Options(x: f64, y: f64, item_type: ItemType, on_close: EventHandler<()>) -> Element {
     let sections = match item_type {
         ItemType::Folder => folder_operations(),
         ItemType::File => vec![],
