@@ -1,30 +1,30 @@
 use crate::icons::*;
-use crate::shared::models::folder_operation::FolderOperation;
+use crate::shared::models::operations::Operation;
 use dioxus::prelude::*;
 
-pub fn folder_ai_features() -> Vec<FolderOperation> {
+pub fn folder_ai_features() -> Vec<Operation> {
     vec![
-        FolderOperation {
+        Operation {
             icon: rsx! {Icon { data: simple_icons::Googlegemini, width: "20px", height: "20px" }},
             label: "Summarize Folder Contents",
             shortcut: None,
         },
-        FolderOperation {
+        Operation {
             icon: rsx! {Icon { data: simple_icons::Googlegemini, width: "20px", height: "20px" }},
             label: "Detect Duplicate Files",
             shortcut: None,
         },
-        FolderOperation {
+        Operation {
             icon: rsx! {Icon { data: simple_icons::Googlegemini, width: "20px", height: "20px" }},
             label: "Organize Files Automatically",
             shortcut: None,
         },
-        FolderOperation {
+        Operation {
             icon: rsx! {Icon { data: simple_icons::Googlegemini, width: "20px", height: "20px" }},
             label: "Suggest Folder Cleanup",
             shortcut: None,
         },
-        FolderOperation {
+        Operation {
             icon: rsx! {Icon { data: simple_icons::Googlegemini, width: "20px", height: "20px" }},
             label: "Explain Folder Purpose",
             shortcut: None,

@@ -1,4 +1,4 @@
-use crate::shared::models::folder_operation::FolderOperation;
+use crate::shared::models::operations::Operation;
 
 pub struct FolderOperationSection {
     #[allow(dead_code)]
@@ -10,5 +10,5 @@ pub struct FolderOperationSection {
     #[allow(dead_code)]
     pub icon_prefix: &'static str, // "boi" / "fm"
     #[allow(dead_code)]
-    pub items: Vec<FolderOperation>,
+    pub items: Vec<Operation>,
 }
