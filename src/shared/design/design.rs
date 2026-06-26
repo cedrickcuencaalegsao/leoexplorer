@@ -6,6 +6,16 @@ use crate::shared::constant::constant::{
 pub fn main_style() -> String {
     format! {
         "
+        *{{
+            box-sizing: border-box;
+        }}
+        html, body {{
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }}
         @font-face {{
             font-family: 'GoogleSans';
             src: url('/assets/fonts/GoogleSans-Regular.ttf') format('truetype');
@@ -54,8 +64,8 @@ pub fn main_style() -> String {
             background-color: #EAEAEA;
         }}
         .side-panel-container {{
-            width: 15%;
-            min-width: 220px;
+            width: 20%;
+            min-width: 200px;
             background-color: #ffffff;
             overflow: hidden;
             display: flex;
@@ -83,6 +93,8 @@ pub fn main_style() -> String {
         .dynamic-sidebar-container {{
             width: 100%;
             max-width: 50px;
+            height: 100%;
+            min-height: 0;
             background-color: #ffffff;
         }}
         "
@@ -308,13 +320,9 @@ pub fn side_panel_style() -> String {
             height: 100%;
             overflow-y: auto;
             padding-right: 10px;
-            /* Firefox */
-            scrollbar-width: thin;
-            scrollbar-color: rgba(0,0,0,0.2) transparent;
         }}
-        /* Chrome, Edge, Safari */
         .side-panel::-webkit-scrollbar {{
-            width: 5px;
+            width: 3px;
         }}
         .side-panel::-webkit-scrollbar-track {{
             background: transparent;
@@ -325,6 +333,12 @@ pub fn side_panel_style() -> String {
         }}
         .side-panel::-webkit-scrollbar-thumb:hover {{
             background: rgba(0,0,0,0.3);
+        }}
+        @supports not selector(::-webkit-scrollbar) {{
+            .side-panel {{
+                scrollbar-width: thin;
+                scrollbar-color: rgba(0,0,0,0.2) transparent;
+            }}
         }}
         .sp-header {{
             font-size: 14px;
@@ -523,6 +537,7 @@ pub fn sp_drive_style() -> String {
     }
 }
 
+#[allow(dead_code)]
 pub fn sp_cloud_style() -> String {
     format!(
         ".sp-cloud {{
@@ -565,5 +580,44 @@ pub fn sp_cloud_style() -> String {
             color: #2b2b2b;
             transition: transform 0.3s ease;
         }}"
+    )
+}
+
+#[allow(dead_code)]
+pub fn dynamic_side_bar_style() -> String {
+    format!(
+        ".dynamic-side-bar {{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: column;
+            background-color: transparent;
+            border-radius: 7px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }}
+        .action-container {{
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+        }}
+        .ai-container {{
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+        }}
+        .actions-container{{
+            flex: 3;
+            height: 100%;
+            min-height: 200px;
+        }}
+        .utilities-container{{
+            flex: 1;
+            height: 100%;
+            min-height: 0;
+            overflow-y: auto;
+        }}
+        "
     )
 }

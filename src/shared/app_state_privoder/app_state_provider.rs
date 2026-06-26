@@ -1,4 +1,4 @@
-use crate::shared::enums::tab_content::TabContent;
+use crate::shared::enums::{item_type::ItemType, tab_content::TabContent};
 use crate::shared::models::{app_state::AppState, tab::Tab};
 use dioxus::prelude::*;
 
@@ -14,6 +14,8 @@ pub fn AppStateProvider(children: Element) -> Element {
             }]
         }),
         active_tab: use_signal(|| 0),
+        selected_item_type: use_signal(|| ItemType::Folder),
+        selected_item_path: use_signal(|| String::new()),
     };
     use_context_provider(|| state);
     rsx! {

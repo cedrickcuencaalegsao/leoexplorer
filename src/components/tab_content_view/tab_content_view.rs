@@ -33,7 +33,6 @@ pub fn TabContentView(tab: Tab, is_active: bool) -> Element {
                 div { class: "side-panel-container", SidePanel {} }
                 div { class: "main-panel-container", Welcome {} }
                 div { class: "preview-panel-container" }
-                div { class: "dynamic-sidebar-container" }
             }
         },
     }
