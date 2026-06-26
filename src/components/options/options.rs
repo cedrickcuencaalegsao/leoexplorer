@@ -1,4 +1,6 @@
-use crate::shared::constant::folder_operations::folder_operations;
+use crate::shared::constant::{
+    file_operations::FileOperations, folder_operations::folder_operations,
+};
 use crate::shared::design::folder_options_style::folder_options_style;
 use crate::shared::enums::item_type::ItemType;
 use dioxus::prelude::*;
@@ -7,7 +9,7 @@ use dioxus::prelude::*;
 pub fn Options(x: f64, y: f64, item_type: ItemType, on_close: EventHandler<()>) -> Element {
     let sections = match item_type {
         ItemType::Folder => folder_operations(),
-        ItemType::File => vec![],
+        ItemType::File => FileOperations(),
         ItemType::Unknown | ItemType::Default => vec![],
     };
     let total = sections.len();

@@ -1,6 +1,6 @@
 use crate::shared::models::operations::Operation;
 
-pub struct FolderOperationSection {
+pub struct OperationSection {
     #[allow(dead_code)]
     pub title: &'static str, // "Basic Operations" / "Folder Management Operations"
     #[allow(dead_code)]
