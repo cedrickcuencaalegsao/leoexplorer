@@ -1,4 +1,4 @@
-pub fn folder_options_style() -> String {
+pub fn options_style() -> String {
     format! {"
         .ctx-overlay {{
             position: fixed;

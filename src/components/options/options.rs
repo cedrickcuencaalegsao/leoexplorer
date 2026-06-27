@@ -1,7 +1,7 @@
 use crate::shared::constant::{
     file_operations::FileOperations, folder_operations::folder_operations,
 };
-use crate::shared::design::folder_options_style::folder_options_style;
+use crate::shared::design::options_style::options_style;
 use crate::shared::enums::item_type::ItemType;
 use dioxus::prelude::*;
 
@@ -15,7 +15,7 @@ pub fn Options(x: f64, y: f64, item_type: ItemType, on_close: EventHandler<()>) 
     let total = sections.len();
 
     rsx! {
-        style { "{folder_options_style()}" }
+        style { "{options_style()}" }
         div {
             class: "folder-ctx-menu",
             style: "
