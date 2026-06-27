@@ -4,6 +4,7 @@ pub mod file_informations;
 pub mod file_operations;
 pub mod file_security;
 pub mod file_sharing;
+pub mod file_type_actions;
 pub mod file_version;
 
 pub use file_ai_features::file_ai_features;
