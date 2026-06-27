@@ -1,39 +1,34 @@
-use crate::components::side_panel::SidePanel;
-use crate::main_content_manager::pages::{cloud_web_view::CloudWebView, welcome::Welcome};
-use crate::shared::{enums::tab_content::TabContent, models::tab::Tab};
+use crate::main_content_manager::main_content_manager::MainContentManager;
+use crate::shared::constant::allowed_tabs::is_tab_allowed;
+use crate::shared::design::access_denied_style::access_denied_style;
+use crate::shared::models::{app_state::AppState, tab::Tab};
 use dioxus::prelude::*;
 
 #[component]
 pub fn TabContentView(tab: Tab, is_active: bool) -> Element {
-    match &tab.content {
-        TabContent::GDrive => rsx! {
-            CloudWebView {
-                url: "https://drive.google.com",
-                label: "gdrive",
-                is_active,
-            }
-        },
-        TabContent::ICloud => rsx! {
-            CloudWebView {
-                url: "https://www.icloud.com",
-                label: "icloud",
-                is_active,
-            }
-        },
-        TabContent::GMail => rsx! {
-            CloudWebView {
-                url: "https://mail.google.com",
-                label: "gmail",
-                is_active,
-            }
-        },
-        _ => rsx! {
+    let state = use_context::<AppState>();
+    let permission = state.permission.read().clone();
+
+    if !is_tab_allowed(&permission, &tab.content) {
+        return rsx! {
+            style { "{access_denied_style()}" }
             div {
-                class: "app-container",
-                div { class: "side-panel-container", SidePanel {} }
-                div { class: "main-panel-container", Welcome {} }
-                div { class: "preview-panel-container" }
+                class: "access-denied",
+                div {
+                    class: "access-denied-box",
+                    span { class: "access-denied-icon", "" }
+                    h2 { "Access Denied" }
+                    p { "You don't have permission to view this page." }
+                    p {
+                        class: "access-denied-role",
+                        "Current role: {permission:?}"
+                    }
+                }
             }
-        },
+        };
+    }
+
+    rsx! {
+        MainContentManager { tab, is_active }
     }
 }

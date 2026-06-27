@@ -1,21 +1,47 @@
+use crate::components::side_panel::SidePanel;
+use crate::main_content_manager::pages::{
+    account::Account, cloud_web_view::CloudWebView, dashboard::Dashboard, editor::Editor,
+    file_explorer::FileExplorer, help::Help, home::Home, settings::Settings, terminal::Terminal,
+    welcome::Welcome,
+};
 use crate::shared::{enums::tab_content::TabContent, models::tab::Tab};
 use dioxus::prelude::*;
 
-#[component]
-pub fn MainContentManager(tab: Tab) -> Element {
-    rsx! {
-        match &tab.content {
-            TabContent::Welcome => rsx! { div { "Welcome screen" } },
-            TabContent::FileExplorer(path) => rsx! { div { "Browsing: {path}" } },
-            TabContent::Editor(path) => rsx! { div { "Editing: {path}" } },
-            TabContent::Settings => rsx! { div { "Settings" } },
-            TabContent::Terminal => rsx! { div { "Terminal" } },
-            TabContent::Help => rsx! { div { "Help" } },
-            TabContent::Account => rsx! { div { "Account" } },
-            TabContent::GMail => rsx! { div { "GMail" } },
-            TabContent::ICloud => rsx! { div { "iCloud" } },
-            TabContent::GDrive => rsx! { div { "GDrive" } },
-            TabContent::Dashboard => rsx! { div { "Dashboard" } },
+macro_rules! with_layout {
+    ($content:expr) => {
+        rsx! {
+            div {
+                class: "app-container",
+                div { class: "side-panel-container", SidePanel {} }
+                div { class: "main-panel-container", {$content} }
+                div { class: "preview-panel-container" }
+            }
         }
+    };
+}
+
+#[component]
+pub fn MainContentManager(tab: Tab, is_active: bool) -> Element {
+    match &tab.content {
+        TabContent::GDrive => rsx! {
+            CloudWebView { url: "https://drive.google.com", label: "gdrive", is_active }
+        },
+        TabContent::ICloud => rsx! {
+            CloudWebView { url: "https://www.icloud.com", label: "icloud", is_active }
+        },
+        TabContent::GMail => rsx! {
+            CloudWebView { url: "https://mail.google.com", label: "gmail", is_active }
+        },
+        TabContent::Welcome => with_layout!(rsx! { Welcome {} }),
+        TabContent::Dashboard => with_layout!(rsx! { Dashboard {} }),
+        TabContent::Account => with_layout!(rsx! { Account {} }),
+        TabContent::Settings => with_layout!(rsx! { Settings {} }),
+        TabContent::Terminal => with_layout!(rsx! { Terminal {} }),
+        TabContent::Help => with_layout!(rsx! { Help {} }),
+        TabContent::Home => with_layout!(rsx! { Home {} }),
+        TabContent::FileExplorer(path) => {
+            with_layout!(rsx! { FileExplorer { path: path.clone() } })
+        }
+        TabContent::Editor(path) => with_layout!(rsx! { Editor { path: path.clone() } }),
     }
 }
