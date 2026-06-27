@@ -12,4 +12,5 @@ pub enum TabContent {
     GDrive,
     ICloud,
     Dashboard,
+    Home,
 }

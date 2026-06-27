@@ -1,2 +1,10 @@
+pub mod account;
 pub mod cloud_web_view;
+pub mod dashboard;
+pub mod editor;
+pub mod file_explorer;
+pub mod help;
+pub mod home;
+pub mod settings;
+pub mod terminal;
 pub mod welcome;
