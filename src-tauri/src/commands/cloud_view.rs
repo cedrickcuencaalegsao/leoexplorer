@@ -1,9 +1,5 @@
-use std::collections::HashMap;
-use std::sync::Mutex;
-use tauri::webview::WebviewBuilder;
-use tauri::{AppHandle, Manager, WebviewUrl};
-
-pub struct CloudViewState(pub Mutex<HashMap<String, tauri::Webview>>);
+use crate::repositories::cloud_view_manager::CloudViewManager;
+use tauri::AppHandle;
 
 #[tauri::command]
 pub async fn embed_cloud_view(
@@ -14,33 +10,9 @@ pub async fn embed_cloud_view(
     y: i32,
     width: u32,
     height: u32,
-    state: tauri::State<'_, CloudViewState>,
+    manager: tauri::State<'_, CloudViewManager>,
 ) -> Result<(), String> {
-    let mut views = state.0.lock().unwrap();
-
-    if views.contains_key(&label) {
-        return Ok(());
-    }
-
-    // ↓ get_window returns tauri::window::Window which HAS add_child
-    let window = app
-        .get_window("main")
-        .ok_or_else(|| "main window not found".to_string())?;
-
-    let webview = window
-        .add_child(
-            WebviewBuilder::new(
-                &label,
-                WebviewUrl::External(url.parse().map_err(|e| format!("{e}"))?),
-            )
-            .auto_resize(),
-            tauri::LogicalPosition::new(x as f64, y as f64),
-            tauri::LogicalSize::new(width as f64, height as f64),
-        )
-        .map_err(|e| e.to_string())?;
-
-    views.insert(label, webview);
-    Ok(())
+    manager.embed(&app, label, url, x, y, width, height)
 }
 
 #[tauri::command]
@@ -50,50 +22,31 @@ pub async fn resize_cloud_view(
     y: i32,
     width: u32,
     height: u32,
-    state: tauri::State<'_, CloudViewState>,
+    manager: tauri::State<'_, CloudViewManager>,
 ) -> Result<(), String> {
-    let views = state.0.lock().unwrap();
-    if let Some(view) = views.get(&label) {
-        view.set_position(tauri::LogicalPosition::new(x as f64, y as f64))
-            .map_err(|e| e.to_string())?;
-        view.set_size(tauri::LogicalSize::new(width as f64, height as f64))
-            .map_err(|e| e.to_string())?;
-    }
-    Ok(())
+    manager.resize(&label, x, y, width, height)
 }
 
 #[tauri::command]
 pub async fn show_cloud_view(
     label: String,
-    state: tauri::State<'_, CloudViewState>,
+    manager: tauri::State<'_, CloudViewManager>,
 ) -> Result<(), String> {
-    let views = state.0.lock().unwrap();
-    if let Some(view) = views.get(&label) {
-        view.show().map_err(|e| e.to_string())?;
-    }
-    Ok(())
+    manager.show(&label)
 }
 
 #[tauri::command]
 pub async fn hide_cloud_view(
     label: String,
-    state: tauri::State<'_, CloudViewState>,
+    manager: tauri::State<'_, CloudViewManager>,
 ) -> Result<(), String> {
-    let views = state.0.lock().unwrap();
-    if let Some(view) = views.get(&label) {
-        view.hide().map_err(|e| e.to_string())?;
-    }
-    Ok(())
+    manager.hide(&label)
 }
 
 #[tauri::command]
 pub async fn close_cloud_view(
     label: String,
-    state: tauri::State<'_, CloudViewState>,
+    manager: tauri::State<'_, CloudViewManager>,
 ) -> Result<(), String> {
-    let mut views = state.0.lock().unwrap();
-    if let Some(view) = views.remove(&label) {
-        view.close().map_err(|e| e.to_string())?;
-    }
-    Ok(())
+    manager.close(&label)
 }

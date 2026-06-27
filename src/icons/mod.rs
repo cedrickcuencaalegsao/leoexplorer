@@ -38,11 +38,35 @@ pub fn Icon(
 }
 
 pub mod basil;
+pub mod boxicons;
 pub mod bxs;
+pub mod clarity;
+pub mod cuida;
+pub mod eos_icons;
+pub mod fa6_regular;
+pub mod fa7_brands;
 pub mod fluent;
+pub mod game_icons;
+pub mod gg;
+pub mod hugeicons;
+pub mod icon_park_outline;
+pub mod iconoir;
+pub mod ion;
+pub mod ix;
+pub mod lets_icons;
 pub mod line_md;
+pub mod lucide;
 pub mod material_symbols;
+pub mod material_symbols_light;
 pub mod mdi;
 pub mod mingcute;
+pub mod mynaui;
+pub mod octicon;
 pub mod proicons;
+pub mod qlementine_icons;
+pub mod radix_icons;
+pub mod simple_icons;
+pub mod solar;
+pub mod streamline_ultimate;
+pub mod tabler;
 pub mod uil;

@@ -1,18 +1,17 @@
 use crate::commands::cloud_view::{
     close_cloud_view, embed_cloud_view, hide_cloud_view, resize_cloud_view, show_cloud_view,
-    CloudViewState,
 };
-use std::collections::HashMap;
-use std::sync::Mutex;
+use crate::repositories::cloud_view_manager::CloudViewManager;
 use tauri::{TitleBarStyle, WebviewUrl, WebviewWindowBuilder};
 
 mod commands;
+mod repositories;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        .manage(CloudViewState(Mutex::new(HashMap::new())))
+        .manage(CloudViewManager::new())
         .invoke_handler(tauri::generate_handler![
             embed_cloud_view,
             resize_cloud_view,
@@ -24,7 +23,6 @@ pub fn run() {
             let mut builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::default())
                 .title("Leo Explorer")
                 .inner_size(1200.00, 820.00);
-
             #[cfg(target_os = "macos")]
             {
                 builder = builder
@@ -32,12 +30,10 @@ pub fn run() {
                     .hidden_title(true)
                     .traffic_light_position(tauri::LogicalPosition::new(12.0, 16.0));
             }
-
             #[cfg(not(target_os = "macos"))]
             {
                 builder = builder.decorations(false);
             }
-
             builder.build()?;
             Ok(())
         })
