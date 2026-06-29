@@ -26,6 +26,7 @@ pub fn allowed_tabs(permission: &Permission) -> Vec<TabContent> {
             TabContent::Settings,
             TabContent::Terminal,
             TabContent::Account,
+            TabContent::Logs,
         ],
     }
 }

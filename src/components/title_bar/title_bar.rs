@@ -1,10 +1,10 @@
 use crate::components::window_control::WindowControl;
-use crate::icons::*;
 use crate::core::{
     design::design::title_bar_style,
     enums::tab_content::TabContent,
     models::{app_state::AppState, tab::Tab},
 };
+use crate::icons::*;
 
 #[allow(non_snake_case)]
 use dioxus::prelude::*;
@@ -24,7 +24,7 @@ pub fn TitleBar() -> Element {
     let state = use_context::<AppState>();
     let mut tabs = state.tabs;
     let mut active = state.active_tab;
-    let tab_list = tabs.read().clone();
+    // let tab_list = tabs.read().clone();
     let mut is_windows = use_signal(|| false);
 
     use_effect(move || {
@@ -42,7 +42,7 @@ pub fn TitleBar() -> Element {
             div{
                 class: "tab-strip",
                 "data-tauri-drag-region": "true",
-                for tab in tab_list.into_iter() {
+                for tab in tabs.read().clone() {
                     div{
                         key: "{tab.id}",
                         class: if *active.read() == tab.id { "tab active" } else { "tab" },

@@ -1,10 +1,10 @@
 use crate::components::{header_bar::HeaderBar, side_panel::SidePanel};
+use crate::core::{enums::tab_content::TabContent, models::tab::Tab};
 use crate::main_content_manager::pages::{
     account::Account, cloud_web_view::CloudWebView, dashboard::Dashboard, editor::Editor,
-    file_explorer::FileExplorer, help::Help, home::Home, settings::Settings, terminal::Terminal,
-    welcome::Welcome,
+    file_explorer::FileExplorer, help::Help, home::Home, logs::Logs, settings::Settings,
+    terminal::Terminal, welcome::Welcome,
 };
-use crate::core::{enums::tab_content::TabContent, models::tab::Tab};
 use dioxus::prelude::*;
 
 macro_rules! with_layout {
@@ -36,11 +36,12 @@ pub fn MainContentManager(tab: Tab, is_active: bool) -> Element {
             CloudWebView { url: "https://mail.google.com", label: "gmail", is_active }
         },
         TabContent::Welcome => rsx! { Welcome {} },
+        TabContent::Account => rsx! { Account {} },
+        TabContent::Settings => rsx! { Settings {} },
+        TabContent::Terminal => rsx! { Terminal {} },
+        TabContent::Help => rsx! { Help {} },
+        TabContent::Logs => rsx! { Logs {} },
         TabContent::Dashboard => with_layout!(rsx! { Dashboard {} }),
-        TabContent::Account => with_layout!(rsx! { Account {} }),
-        TabContent::Settings => with_layout!(rsx! { Settings {} }),
-        TabContent::Terminal => with_layout!(rsx! { Terminal {} }),
-        TabContent::Help => with_layout!(rsx! { Help {} }),
         TabContent::Home => with_layout!(rsx! { Home {} }),
         TabContent::FileExplorer(path) => {
             with_layout!(rsx! { FileExplorer { path: path.clone() } })

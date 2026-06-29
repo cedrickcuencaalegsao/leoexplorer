@@ -13,6 +13,7 @@ pub enum TabContent {
     ICloud,
     Dashboard,
     Home,
+    Logs,
 }
 
 impl TabContent {
@@ -30,6 +31,7 @@ impl TabContent {
             TabContent::ICloud => "ICloud",
             TabContent::Dashboard => "Dashboard",
             TabContent::Home => "Home",
+            TabContent::Logs => "Logs",
         }
     }
 }

@@ -28,7 +28,7 @@ pub fn AppStateProvider(children: Element) -> Element {
         }
 
         let new_id = tabs
-            .read()
+            .peek()
             .iter()
             .map(|tab| tab.id)
             .max()
