@@ -1,4 +1,4 @@
-use crate::components::side_panel::SidePanel;
+use crate::components::{header_bar::HeaderBar, side_panel::SidePanel};
 use crate::main_content_manager::pages::{
     account::Account, cloud_web_view::CloudWebView, dashboard::Dashboard, editor::Editor,
     file_explorer::FileExplorer, help::Help, home::Home, settings::Settings, terminal::Terminal,
@@ -12,9 +12,12 @@ macro_rules! with_layout {
         rsx! {
             div {
                 class: "app-container",
-                div { class: "side-panel-container", SidePanel {} }
-                div { class: "main-panel-container", {$content} }
-                div { class: "preview-panel-container" }
+                div { class: "header-bar-container", HeaderBar {} }
+                div { class: "body-container",
+                    div { class: "side-panel-container", SidePanel {} }
+                    div { class: "main-panel-container", {$content} }
+                    div { class: "preview-panel-container" }
+                }
             }
         }
     };

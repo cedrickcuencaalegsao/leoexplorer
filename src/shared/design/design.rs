@@ -60,8 +60,14 @@ pub fn main_style() -> String {
         }}
         .app-container {{
             display: flex;
+            flex-direction: column;
             height: 100%;
             background-color: #EAEAEA;
+        }}
+        .body-container {{
+            display: flex;
+            flex-direction: row;
+            height: 100%;
         }}
         .side-panel-container {{
             width: 20%;
