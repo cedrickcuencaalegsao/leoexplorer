@@ -77,7 +77,7 @@ pub fn TitleBar() -> Element {
                     class: "tab-new",
                     onmousedown: move |event| { event.stop_propagation(); },
                     onclick: move |_| {
-                        let new_id = tabs.read().len();
+                        let new_id = tabs.read().iter().map(|t| t.id).max().map(|id| id + 1).unwrap_or(0);
                         tabs.write().push(
                             Tab{
                                 id: new_id,

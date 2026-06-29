@@ -6,3 +6,13 @@ pub struct Tab {
     pub title: String,
     pub content: TabContent,
 }
+
+impl Default for Tab {
+    fn default() -> Self {
+        Self {
+            id: 0,
+            title: String::new(),
+            content: TabContent::Welcome,
+        }
+    }
+}

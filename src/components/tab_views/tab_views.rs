@@ -7,6 +7,11 @@ pub fn TabViews() -> Element {
     let state = use_context::<AppState>();
     let tabs = state.tabs.clone();
     let active = state.active_tab.clone();
+    let tab_list = tabs.read().clone();
+
+    if tab_list.is_empty() {
+        return rsx! { div { "No tabs open" } };
+    }
 
     rsx! {
         for tab in tabs.read().iter() {

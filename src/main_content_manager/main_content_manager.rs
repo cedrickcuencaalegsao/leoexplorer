@@ -35,7 +35,7 @@ pub fn MainContentManager(tab: Tab, is_active: bool) -> Element {
         TabContent::GMail => rsx! {
             CloudWebView { url: "https://mail.google.com", label: "gmail", is_active }
         },
-        TabContent::Welcome => with_layout!(rsx! { Welcome {} }),
+        TabContent::Welcome => rsx! { Welcome {} },
         TabContent::Dashboard => with_layout!(rsx! { Dashboard {} }),
         TabContent::Account => with_layout!(rsx! { Account {} }),
         TabContent::Settings => with_layout!(rsx! { Settings {} }),
