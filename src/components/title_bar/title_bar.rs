@@ -1,6 +1,6 @@
 use crate::components::window_control::WindowControl;
 use crate::icons::*;
-use crate::shared::{
+use crate::core::{
     design::design::title_bar_style,
     enums::tab_content::TabContent,
     models::{app_state::AppState, tab::Tab},

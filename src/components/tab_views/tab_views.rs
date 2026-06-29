@@ -1,5 +1,5 @@
 use crate::components::tab_content_view::TabContentView;
-use crate::shared::models::app_state::AppState;
+use crate::core::models::app_state::AppState;
 use dioxus::prelude::*;
 
 #[component]

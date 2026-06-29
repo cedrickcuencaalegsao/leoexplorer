@@ -1,4 +1,4 @@
-use crate::shared::design::design::primary_button_style;
+use crate::core::design::design::primary_button_style;
 use dioxus::prelude::*;
 
 #[component]

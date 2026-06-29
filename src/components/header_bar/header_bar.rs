@@ -4,7 +4,7 @@ use dioxus::prelude::*;
 use crate::components::header_bar::{
     header_buttons::HeaderButtons, nav_buttons::NavButtons, search_bar::SearchBar,
 };
-use crate::shared::design::header_bar_style::header_bar_style;
+use crate::core::design::header_bar_style::header_bar_style;
 
 #[component]
 pub fn HeaderBar() -> Element {

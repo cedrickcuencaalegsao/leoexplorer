@@ -1,5 +1,5 @@
 #![allow(non_snake_case)]
-use crate::shared::design::design::sp_drive_style;
+use crate::core::design::design::sp_drive_style;
 use dioxus::prelude::*;
 
 #[component]

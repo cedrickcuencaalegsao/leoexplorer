@@ -1,7 +1,7 @@
 use crate::main_content_manager::main_content_manager::MainContentManager;
-use crate::shared::constant::allowed_tabs::is_tab_allowed;
-use crate::shared::design::access_denied_style::access_denied_style;
-use crate::shared::models::{app_state::AppState, tab::Tab};
+use crate::core::constant::allowed_tabs::is_tab_allowed;
+use crate::core::design::access_denied_style::access_denied_style;
+use crate::core::models::{app_state::AppState, tab::Tab};
 use dioxus::prelude::*;
 
 #[component]

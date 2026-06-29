@@ -1,8 +1,8 @@
-use crate::shared::constant::{
+use crate::core::constant::{
     file_operations::FileOperations, folder_operations::folder_operations,
 };
-use crate::shared::design::options_style::options_style;
-use crate::shared::enums::item_type::ItemType;
+use crate::core::design::options_style::options_style;
+use crate::core::enums::item_type::ItemType;
 use dioxus::prelude::*;
 
 #[component]

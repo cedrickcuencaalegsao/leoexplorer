@@ -1,6 +1,6 @@
 use crate::components::options::Options;
-use crate::shared::design::design::sp_items_style;
-use crate::shared::enums::item_type::ItemType;
+use crate::core::design::design::sp_items_style;
+use crate::core::enums::item_type::ItemType;
 use dioxus::prelude::*;
 
 #[component]

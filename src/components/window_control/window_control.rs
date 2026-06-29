@@ -1,5 +1,5 @@
 use crate::icons::*;
-use crate::shared::design::design::{
+use crate::core::design::design::{
     linux_control_style, macos_control_style, windows_control_style,
 };
 #[allow(non_snake_case)]

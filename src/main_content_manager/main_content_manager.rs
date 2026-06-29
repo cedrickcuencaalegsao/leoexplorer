@@ -4,7 +4,7 @@ use crate::main_content_manager::pages::{
     file_explorer::FileExplorer, help::Help, home::Home, settings::Settings, terminal::Terminal,
     welcome::Welcome,
 };
-use crate::shared::{enums::tab_content::TabContent, models::tab::Tab};
+use crate::core::{enums::tab_content::TabContent, models::tab::Tab};
 use dioxus::prelude::*;
 
 macro_rules! with_layout {

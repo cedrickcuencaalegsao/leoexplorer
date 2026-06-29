@@ -2,7 +2,7 @@ mod app;
 mod components;
 mod icons;
 mod main_content_manager;
-mod shared;
+mod core;
 
 use app::App;
 use dioxus::prelude::*;

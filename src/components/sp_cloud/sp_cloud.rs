@@ -1,4 +1,4 @@
-use crate::shared::design::design::sp_cloud_style;
+use crate::core::design::design::sp_cloud_style;
 use dioxus::prelude::*;
 
 #[component]
