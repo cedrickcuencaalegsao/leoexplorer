@@ -1,5 +1,6 @@
 use crate::components::tab_content_view::TabContentView;
 use crate::core::models::app_state::AppState;
+use crate::main_content_manager::pages::welcome::Welcome;
 use dioxus::prelude::*;
 
 #[component]
@@ -10,7 +11,7 @@ pub fn TabViews() -> Element {
     let tab_list = tabs.read().clone();
 
     if tab_list.is_empty() {
-        return rsx! { div { "No tabs open" } };
+        return rsx! { Welcome {  } };
     }
 
     rsx! {

@@ -1,5 +1,6 @@
 use crate::core::enums::{item_type::ItemType, permissions::Permission, tab_content::TabContent};
 use crate::core::models::tab::Tab;
+use crate::core::services::page_router::PageRouter;
 use dioxus::prelude::*;
 
 #[derive(Clone, PartialEq)]
@@ -11,6 +12,7 @@ pub struct AppState {
     pub selected_item_type: Signal<ItemType>,
     pub selected_item_path: Signal<String>,
     pub permission: Signal<Permission>,
+    pub router: Signal<PageRouter>,
 }
 
 impl AppState {
@@ -32,6 +34,7 @@ impl Default for AppState {
             selected_item_type: Signal::new(ItemType::Unknown),
             selected_item_path: Signal::new(String::new()),
             permission: Signal::new(Permission::Guest),
+            router: Signal::new(PageRouter::default()),
         }
     }
 }

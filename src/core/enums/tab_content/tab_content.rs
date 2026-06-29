@@ -14,3 +14,22 @@ pub enum TabContent {
     Dashboard,
     Home,
 }
+
+impl TabContent {
+    pub fn title(&self) -> &'static str {
+        match self {
+            TabContent::Welcome => "Welcome",
+            TabContent::FileExplorer(_) => "File Explorer",
+            TabContent::Editor(_) => "Editor",
+            TabContent::Settings => "Settings",
+            TabContent::Terminal => "Terminal",
+            TabContent::Help => "Help",
+            TabContent::Account => "Account",
+            TabContent::GMail => "GMail",
+            TabContent::GDrive => "GDrive",
+            TabContent::ICloud => "ICloud",
+            TabContent::Dashboard => "Dashboard",
+            TabContent::Home => "Home",
+        }
+    }
+}
