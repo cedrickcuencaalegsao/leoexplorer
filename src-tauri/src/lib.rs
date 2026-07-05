@@ -1,10 +1,14 @@
-use crate::commands::cloud_view::{
-    close_cloud_view, embed_cloud_view, hide_cloud_view, resize_cloud_view, show_cloud_view,
+use crate::commands::{
+    cloud_view::{
+        close_cloud_view, embed_cloud_view, hide_cloud_view, resize_cloud_view, show_cloud_view,
+    },
+    folder::{create_new_folder, get_folder_children, open_folder, rename_folder},
 };
 use crate::repositories::cloud_view_manager::CloudViewManager;
 use tauri::{TitleBarStyle, WebviewUrl, WebviewWindowBuilder};
 
 mod commands;
+mod core;
 mod repositories;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -13,11 +17,17 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .manage(CloudViewManager::new())
         .invoke_handler(tauri::generate_handler![
+            // Cloude views api
             embed_cloud_view,
             resize_cloud_view,
             show_cloud_view,
             hide_cloud_view,
             close_cloud_view,
+            // Folder api
+            create_new_folder,
+            get_folder_children,
+            open_folder,
+            rename_folder,
         ])
         .setup(|app| {
             let mut builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::default())
