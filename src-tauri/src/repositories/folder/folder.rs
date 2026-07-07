@@ -1,5 +1,6 @@
 use crate::core::models::cache::cache;
 use crate::core::models::file_entry::FileEntry;
+use crate::repositories::cache::CacheService;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::thread;
@@ -56,6 +57,8 @@ impl FolderService {
                 thread::spawn(move || {
                     // mag update ni dri sa cache nato
                     // cache::update_cache_on_create(app_handle_clone, folder_path_clone);
+                    CacheService::instance()
+                        .update_cache_on_create(app_handle_clone, folder_path_clone);
                 });
 
                 Ok(success_message)
@@ -118,6 +121,8 @@ impl FolderService {
         thread::spawn(move || {
             // cache::update_cache_on_remove(app_handle_clone.clone(), old_path_buf);
             // cache::update_cache_on_create(app_handle_clone, new_path_buf);
+            CacheService::instance().update_cache_on_remove(app_handle_clone.clone(), old_path_buf);
+            CacheService::instance().update_cache_on_create(app_handle_clone, new_path_buf);
         });
 
         Ok(format!("Successfully renamed folder to: {}", new_name))
