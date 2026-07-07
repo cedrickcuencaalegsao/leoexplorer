@@ -1,18 +1,14 @@
 #![allow(non_snake_case)]
 use crate::components::{sp_cloud::SpCloud, sp_drive::SpDrive, sp_items::SpItems, sp_menu::SpMenu};
-use crate::icons::*;
-use crate::shared::enums::item_type::ItemType;
-use crate::shared::{
-    constant::constant::{FOLDER_COLOR, GREY},
+use crate::core::enums::item_type::ItemType;
+use crate::core::{
+    constant::constant::{FOLDER_COLOR, GDRIVE_ICONS, GMAIL_ICONS, GREY, ICLOUD_ICONS},
     design::design::side_panel_style,
     enums::tab_content::TabContent,
     models::{app_state::AppState, tab::Tab},
 };
+use crate::icons::*;
 use dioxus::prelude::*;
-
-const ICLOUD_ICONS: Asset = asset!("/assets/icons/apple-icons/iCloud.png");
-const GDRIVE_ICONS: Asset = asset!("/assets/icons/google-icons/googledrive.png");
-const GMAIL_ICONS: Asset = asset!("/assets/icons/google-icons/gmail.png");
 
 #[component]
 pub fn SidePanel() -> Element {

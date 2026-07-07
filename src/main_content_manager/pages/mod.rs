@@ -5,6 +5,7 @@ pub mod editor;
 pub mod file_explorer;
 pub mod help;
 pub mod home;
+pub mod logs;
 pub mod settings;
 pub mod terminal;
 pub mod welcome;

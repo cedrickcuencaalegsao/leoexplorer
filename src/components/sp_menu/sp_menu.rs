@@ -1,5 +1,5 @@
 #![allow(non_snake_case)]
-use crate::shared::{
+use crate::core::{
     design::design::sp_menu_style, services::open_sp_menu::OpenSpMenu,
     ui::expand_sp_menu::expand_sp_menu::ExpandSpMenu,
 };

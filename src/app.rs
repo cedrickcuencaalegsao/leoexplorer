@@ -2,8 +2,8 @@
 use dioxus::prelude::*;
 
 use crate::components::{tab_views::TabViews, title_bar::TitleBar};
-use crate::shared::app_state_privoder::AppStateProvider;
-use crate::shared::design::design::main_style;
+use crate::core::app_state_privoder::AppStateProvider;
+use crate::core::design::design::main_style;
 
 #[component]
 pub fn App() -> Element {
