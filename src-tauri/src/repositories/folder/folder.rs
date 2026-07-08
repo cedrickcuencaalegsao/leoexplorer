@@ -1,4 +1,3 @@
-use crate::core::models::cache::cache;
 use crate::core::models::file_entry::FileEntry;
 use crate::repositories::cache::CacheService;
 use std::fs;

@@ -11,7 +11,7 @@ use rayon::prelude::*;
 use serde::Serialize;
 use std::collections::{HashMap, HashSet};
 use std::fs::{self, File};
-use std::io::{BufWriter, Write};
+use std::io::BufWriter;
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU8, AtomicUsize, Ordering};
 use std::sync::mpsc;
@@ -1409,6 +1409,7 @@ impl CacheService {
         roots
     }
 
+    #[allow(dead_code)]
     fn get_system_drives_impl() -> Result<Vec<String>, String> {
         #[cfg(target_os = "windows")]
         {

@@ -18,8 +18,8 @@ impl DriveService {
         Self::default()
     }
 
-    pub fn ini_cache(&self) -> AppCacheState {
-        let cache_path = self.cache_file_path();
+    pub fn init_cache() -> AppCacheState {
+        let cache_path = Self::new().cache_file_path();
 
         if cache_path.exists() {
             println!("Cache file found at startup: {:?}", cache_path);
