@@ -21,13 +21,14 @@ impl Default for Cache {
 }
 
 impl Cache {
+    #[allow(dead_code)]
     pub fn new(number_of_cores: usize, number_of_threads_per_core: usize) -> Self {
         Self {
             num_of_cores: number_of_cores,
             thread_count_per_core: number_of_threads_per_core,
         }
     }
-
+    #[allow(dead_code)]
     pub fn total_thread(&self) -> usize {
         self.num_of_cores * self.thread_count_per_core
     }
