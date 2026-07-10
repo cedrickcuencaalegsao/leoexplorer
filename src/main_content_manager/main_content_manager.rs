@@ -12,11 +12,11 @@ macro_rules! with_layout {
         rsx! {
             div {
                 class: "app-container",
-                div { class: "header-bar-container", HeaderBar {} }
+                // div { class: "header-bar-container", HeaderBar {} }
+                div { class: "side-panel-container", SidePanel {} }
                 div { class: "body-container",
-                    div { class: "side-panel-container", SidePanel {} }
                     div { class: "main-panel-container", {$content} }
-                    div { class: "preview-panel-container" }
+                    div { class: "preview-panel-container", p{"preview"}}
                 }
             }
         }

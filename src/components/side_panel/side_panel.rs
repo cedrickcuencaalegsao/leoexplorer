@@ -4,7 +4,7 @@ use crate::core::enums::item_type::ItemType;
 use crate::core::{
     constant::constant::{FOLDER_COLOR, GDRIVE_ICONS, GMAIL_ICONS, GREY, ICLOUD_ICONS},
     design::design::side_panel_style,
-    enums::tab_content::TabContent,
+    enums::{file_type::*, tab_content::TabContent},
     models::{app_state::AppState, tab::Tab},
 };
 use crate::icons::*;
@@ -89,12 +89,12 @@ pub fn SidePanel() -> Element {
             SpItems {
                 label: "Document.docx".to_string(),
                 icon: rsx! {Icon {data: line_md::File, width: "20", height: "20", color: "#4a90d9"}},
-                item_type: ItemType::File,
+                item_type: ItemType::File(FileType::Document(DocumentType::Word)),
             }
             SpItems {
                 label: "Text.txt".to_string(),
                 icon: rsx! {Icon {data: line_md::File, width: "20", height: "20", color: "#888"}},
-                item_type: ItemType::File,
+                item_type: ItemType::File(FileType::Document(DocumentType::Txt)),
             }
         }
     };

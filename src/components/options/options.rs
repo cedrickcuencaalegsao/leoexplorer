@@ -2,14 +2,23 @@ use crate::core::constant::{
     file_operations::FileOperations, folder_operations::folder_operations,
 };
 use crate::core::design::options_style::options_style;
-use crate::core::enums::item_type::ItemType;
+use crate::core::enums::{file_type::FileType, item_type::ItemType};
 use dioxus::prelude::*;
 
 #[component]
 pub fn Options(x: f64, y: f64, item_type: ItemType, on_close: EventHandler<()>) -> Element {
     let sections = match item_type {
         ItemType::Folder => folder_operations(),
-        ItemType::File => FileOperations(),
+
+        ItemType::File(file_type) => match file_type {
+            FileType::Document(_) => FileOperations(),
+            FileType::Image(_) => FileOperations(),
+            FileType::Video(_) => FileOperations(),
+            FileType::Developer(_) => FileOperations(),
+            FileType::Unknown => FileOperations(),
+            _ => FileOperations(),
+        },
+
         ItemType::Unknown | ItemType::Default => vec![],
     };
     let total = sections.len();
