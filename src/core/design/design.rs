@@ -1,5 +1,5 @@
 use crate::core::constant::constant::{
-    BORDER_RADIUS, DARK_BLUE, FONT_SIZE, GREY, PADDING, PRIMARY_COLOR,
+    BORDER_RADIUS, DARK_BLUE, FONT_SIZE, GREY, LIGHT_GREY, PADDING, PRIMARY_COLOR,
 };
 
 #[allow(dead_code)]
@@ -60,7 +60,7 @@ pub fn main_style() -> String {
         }}
         .app-container {{
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             height: 100%;
             background-color: #EAEAEA;
         }}
@@ -68,20 +68,22 @@ pub fn main_style() -> String {
             display: flex;
             flex-direction: row;
             height: 100%;
+            width: 100%;
         }}
         .side-panel-container {{
             width: 20%;
-            min-width: 200px;
-            background-color: #ffffff;
+            min-width: 270px;
+            background-color: {LIGHT_GREY};
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            padding: 10px;
+            padding: 0px 10px 10px 10px;
             color: #0a1931;
         }}
         .main-panel-container {{
             position: relative;
-            flex: 1;
+            flex: 2;
+            width: 100%;
             min-width: 500px;
             background-color: #f6fafd;
         }}
@@ -153,15 +155,15 @@ pub fn title_bar_style() -> String {
             align-items: center;
             justify-content: space-between;
             gap: 8px;
-            height: 34px;
+            height: 27px;
             flex: 1 1 170px;
             min-width: 80px;
             width: 170px;
             max-width: 170px;
-            margin: 6px 3px 0 3px;
+            margin: 6px 3px 6px 3px;
             padding: 0 10px;
             cursor: pointer;
-            border-radius: 8px 8px 0 0;
+            border-radius: 8px 8px 8px 8px;
             background: transparent;
             border-right: 1px solid rgba(0,0,0,0.08);
             transition: background 0.15s ease;
@@ -322,6 +324,8 @@ pub fn macos_control_style() -> String {
 pub fn side_panel_style() -> String {
     format! {
         ".side-panel {{
+            background-color: #ffffff;
+            border-radius: 8px;
             width: 100%;
             height: 100%;
             overflow-y: auto;

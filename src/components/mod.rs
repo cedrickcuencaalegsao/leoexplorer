@@ -1,5 +1,6 @@
 pub mod buttons;
 pub mod header_bar;
+pub mod item;
 pub mod options;
 pub mod side_panel;
 pub mod sp_cloud;

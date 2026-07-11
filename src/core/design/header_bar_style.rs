@@ -6,6 +6,7 @@ pub fn header_bar_style() -> String {
             align-items: center;
             padding: 4px 10px;
             background-color: #ffffff;
+            border-radius: 8px;
             height: 44px;
             gap: 8px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);

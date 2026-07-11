@@ -7,6 +7,7 @@ pub const PADDING: &str = "12px 24px";
 pub const DARK_BLUE: &str = "#201260";
 pub const FOLDER_COLOR: &str = "#B96D02";
 pub const GREY: &str = "#828282";
+pub const LIGHT_GREY: &str = "#dee1e6";
 
 // cloudicons
 use dioxus::prelude::*;
