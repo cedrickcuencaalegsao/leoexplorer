@@ -1,5 +1,5 @@
 #![allow(non_snake_case)]
-use crate::components::item::Item;
+use crate::components::{header_bar::HeaderBar, item::Item};
 use crate::core::{
     design::file_explorer::file_explorer_style, enums::view_mode::ViewMode,
     services::get_items::GetItems,
@@ -28,6 +28,12 @@ pub fn FileExplorer(props: FileExplorerProps) -> Element {
         style {"{file_explorer_style()}" },
         div{
             class:"file-explorer-main-container",
+
+            div{
+                class:"header-bar-container",
+                HeaderBar { }
+            }
+
             div{
                 class:"item-container",
                 div{
