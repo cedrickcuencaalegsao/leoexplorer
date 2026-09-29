@@ -3,60 +3,32 @@ use crate::core::{
     enums::{file_type::*, item_type::ItemType, view_mode::ViewMode},
     models::items::Items,
 };
+use serde_wasm_bindgen::{from_value, to_value};
+use wasm_bindgen::prelude::*;
 
-pub fn GetItems(view_mode: ViewMode) -> Vec<Items> {
-    let items: Vec<Items> = vec![
-        Items {
-            name: "Folder 1".to_string(),
-            item_type: ItemType::Folder,
-            date_created: "DD/MM/YYYY".to_string(),
-            date_modified: "DD/MM/YYYY".to_string(),
-            flag: None,
-            path: "~/Desktop/Folder 1".to_string(),
-            is_dir: true,
-            view_mode,
-        },
-        Items {
-            name: "Folder 2".to_string(),
-            item_type: ItemType::Folder,
-            date_created: "DD/MM/YYYY".to_string(),
-            date_modified: "DD/MM/YYYY".to_string(),
-            flag: Some("LOCKED".to_string()),
-            path: "~/Desktop/Folder 2".to_string(),
-            is_dir: true,
-            view_mode,
-        },
-        Items {
-            name: "Folder 3 looooooooooooongggggggggg naaaaaaaaammmmmmeeeeeee".to_string(),
-            item_type: ItemType::Folder,
-            date_created: "DD/MM/YYYY".to_string(),
-            date_modified: "DD/MM/YYYY".to_string(),
-            flag: Some("HIDDEN".to_string()),
-            path: "~/Desktop/Folder 3 AHAHAHAHAAHAHAHAHAHAHAHAHAHAAHAHAHA".to_string(),
-            is_dir: true,
-            view_mode,
-        },
-        Items {
-            name: "File name".to_string(),
-            item_type: ItemType::File(FileType::Unknown),
-            date_created: "DD/MM/YYYY".to_string(),
-            date_modified: "DD/MM/YYYY".to_string(),
-            flag: None,
-            path: "~/Desktop/file name wAHAHAAHAHAHAAHAHAHAHAHAHAHAAH".to_string(),
-            is_dir: false,
-            view_mode,
-        },
-        Items {
-            name: "file name".to_string(),
-            item_type: ItemType::File(FileType::Document(DocumentType::Json)),
-            date_created: "DD/MM/YYYY".to_string(),
-            date_modified: "DD/MM/YYYY".to_string(),
-            flag: None,
-            path: "~/Desktop/file name".to_string(),
-            is_dir: false,
-            view_mode,
-        },
-    ];
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = ["window", "__TAURI__", "core"], js_name = "invoke", catch)]
+    async fn invoke(cmd: &str, args: JsValue) -> Result<JsValue, JsValue>;
+}
 
-    return items;
+pub async fn GetItems(path: &str, view_mode: ViewMode) -> Result<Vec<Items>, String> {
+    let args = to_value(&serde_json::json!({ "path": path, "viewMode": view_mode }))
+        .map_err(|e| e.to_string())?;
+
+    let result = invoke("open_folder", args)
+        .await
+        .map_err(|e| e.as_string().unwrap_or_else(|| format!("{:?}", e)))?;
+
+    let items: Vec<Items> = from_value(result).map_err(|e| e.to_string())?;
+
+    Ok(items)
+}
+
+pub async fn GetDefaultStartPath() -> String {
+    let result = invoke("get_default_start_path", JsValue::NULL).await;
+    match result {
+        Ok(v) => from_value(v).unwrap_or_default(),
+        Err(e) => String::new(),
+    }
 }

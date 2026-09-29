@@ -7,7 +7,9 @@ use crate::commands::{
         close_cloud_view, embed_cloud_view, hide_cloud_view, resize_cloud_view, show_cloud_view,
     },
     drive::{init_cache, open_roots},
-    folder::{create_new_folder, get_folder_children, open_folder, rename_folder},
+    folder::{
+        create_new_folder, get_default_start_path, get_folder_children, open_folder, rename_folder,
+    },
 };
 use crate::repositories::cloud_view_manager::CloudViewManager;
 use tauri::{TitleBarStyle, WebviewUrl, WebviewWindowBuilder};
@@ -33,6 +35,7 @@ pub fn run() {
             get_folder_children,
             open_folder,
             rename_folder,
+            get_default_start_path,
             // Cache api,
             get_cache_status,
             get_cached_data,

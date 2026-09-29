@@ -1,6 +1,7 @@
 use crate::core::enums::{item_type::ItemType, view_mode::ViewMode};
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 pub struct Items {
     pub name: String,
     pub item_type: ItemType,

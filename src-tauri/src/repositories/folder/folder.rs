@@ -18,7 +18,14 @@ impl FolderService {
         Self::default()
     }
 
+    pub fn default_start_path() -> PathBuf {
+        dirs::desktop_dir()
+            .or_else(dirs::home_dir)
+            .unwrap_or_else(|| PathBuf::from("."))
+    }
+
     pub fn open_folder(&self, path: &Path) -> Result<Vec<FileEntry>, String> {
+        println!("{}", path.to_string_lossy());
         if !path.exists() {
             return Err("Path does not exist".to_string());
         }
