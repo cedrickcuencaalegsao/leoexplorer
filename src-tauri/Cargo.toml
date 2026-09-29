@@ -31,3 +31,4 @@ once_cell = "1.21.4"
 rayon = "1.12.0"
 bincode = { version = "2.0.1", features = ["serde"] }
 zstd = { version = "0.13.3", features = ["zstdmt"] }
+dirs = "5"

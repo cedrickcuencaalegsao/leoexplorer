@@ -1,5 +1,7 @@
 use crate::core::enums::file_type::FileType;
-#[derive(Debug, Clone, PartialEq, Eq)]
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 pub enum ItemType {
     #[allow(dead_code)]
     File(FileType),
